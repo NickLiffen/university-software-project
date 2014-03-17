@@ -3,7 +3,7 @@
 //Defines Host, User and Pass to correct information to be able to connect to database
 define('HOST', 'localhost');
 define('USER', 'root');
-define('PASS', '');
+define('PASS', 'root');
 
 
 
@@ -23,12 +23,12 @@ if(!$result = $database->query($createDatabase)){
 }
 
 //Selects the database I want to use (Don't know how this works, it really shouldn't!)
-$selectDatabase = $database->select_db("webCoursework"); 
+$selectDatabase = $database->select_db("webCoursework");
 
 if ($result = $database->query($selectDatabase)) {
     die('Could not select database [' . $database->error . ']');
     $result->close();
-	
+
 }
 require_once("create_insert_tables.php");
 

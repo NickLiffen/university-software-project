@@ -19,7 +19,7 @@ pageLoaded = function () {
 			//Calls the function  JSON and puts in the response text and variale target
 			json(xhr.responseText, target);
 
-		} 
+		}
 	};
 
 	// initialise a request, specifying the HTTP method
@@ -36,14 +36,14 @@ function json(jsonObj, target) {
 
 	//Starts the loop
 	for( var i=0; i < json_output.length; i++) {
-						
+
 		var output 	= 	"<div id='item"					+json_output[i].id 			+"' class='item'>"	+
 						"<h2> Product Name: " 			+ json_output[i].name		+ '</h2>'			+
 						"<p><img src='../CMS/Images/" 	+json_output[i].name 		+ ".jpg'> </p>" 	+
 						"<p> Product Quantity: " 		+ json_output[i].quantity 	+ '</p>' 			+
 						"<p> Product Description: " 	+ json_output[i].description+ '</p>' 			+
 						"<p> Product Category: " 		+ json_output[i].category 	+ '</p>' 			+
-						"<p> Product Price: " 			+ json_output[i].price 		+ '</p>'			+
+						"<p> Product Price: £" 			+ json_output[i].price 		+ '</p>'			+
 						"</div>";
 
 
@@ -56,7 +56,7 @@ function json(jsonObj, target) {
 function injectIntoModal(data){
   var modal = document.querySelector(".modal");
 
-  
+
   modal.innerHTML = data;
   toggleModal(modal);
 
@@ -73,27 +73,27 @@ function toggleModal(modal){
 
 
 function setListeners(){
-  
+
  var itemsContainer = document.getElementById("collectInfo");
 
-  
+
  itemsContainer.addEventListener("click", function(event){
-    
+
     var e = event.target;
-    
+
       while(e.id.indexOf('item') == -1){
-      e = e.parentNode;      
+      e = e.parentNode;
     }
 
     var data = e.id;
 
     modalAjax(data);
 
-    
-    //injectIntoModal(data);  
-  
+
+    //injectIntoModal(data);
+
   }, false);
-      
+
  }
 
 
@@ -119,7 +119,7 @@ function modalAjax(data) {
 			//Calls the function  JSON and puts in the response text and variale target
 			jsonModal(xhr.responseText);
 
-		} 
+		}
 	};
 
 	// initialise a request, specifying the HTTP method
@@ -156,7 +156,7 @@ function jsonModal(jsonObj) {
 
 	//Starts the loop
 	for( var i=0; i < json_output.length; i++) {
-						
+
 		var output 	= 	"<div id='item"										+	json_output[i].id  				+"' class='itemModal'>"	+
 						"<h2> Product Name: " 								+ 	json_output[i].name				+ "</h2>"				+
 						"<p><img src='../CMS/Images/" 						+	json_output[i].name 			+ ".jpg'></p>"			+
@@ -164,14 +164,14 @@ function jsonModal(jsonObj) {
 						"<p><span class='bold'>Quantity:</span> " 		+ 	json_output[i].quantity 		+ "</p>" 				+
 						"<p><span class='bold'>Description:</span> " 	+ 	json_output[i].description 		+ "</p>" 				+
 						"<p><span class='bold'>Category:</span> " 		+ 	json_output[i].category 		+ "</p>" 				+
-						"<p><span class='bold'>Price:</span> " 		+ 	json_output[i].price 			+ "</p>"				+
+						"<p><span class='bold'>Price:£</span> " 		+ 	json_output[i].price 			+ "</p>"				+
 						"<p><span class='bold'>How many would you like: </span><input type ='number' id ='numberQuantity'> <span id='numberValidate'></span></p>"+
-						"<p><input 	type='button' value='Add to Basket!' id='addToBasket'><p>" 												+									
+						"<p><input 	type='button' value='Add to Basket!' id='addToBasket'><p>" 												+
 						"</div>"																										+
 						"</div>";
 
 
-						
+
 						injectIntoModal(output);
 	}
 
@@ -202,6 +202,3 @@ window.addEventListener("load", setBasketTotal(0));
 window.addEventListener("load", modal());
 window.addEventListener("load", pageLoaded);
 window.addEventListener("load", setListeners());
-
-
-
