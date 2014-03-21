@@ -190,12 +190,14 @@ function setBasketTotal(number){
 
 function basketButtonLoad(){
 	var addToBasketButton = document.getElementById('addToBasket');
+	if(addToBasketButton){
 	addToBasketButton.addEventListener("click", basketFunction);
+}
 }
 
 function basketFunction(){
-	console.log("add1");
-	setBasketTotal(+getBasketTotal() + 1);
+	var numberQuantity = document.getElementById("numberQuantity").value;
+	setBasketTotal(+getBasketTotal() + numberQuantity);
 }
 
 window.addEventListener("load", setBasketTotal(0));
