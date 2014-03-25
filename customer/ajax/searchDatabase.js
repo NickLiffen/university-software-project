@@ -70,22 +70,32 @@ function json(jsonObj, target) {
 }
 
 
-function injectIntoModal(data){
+function injectIntoModal(product_id, data){
   var modal = document.querySelector(".modal");
 
 
   modal.innerHTML = data;
   toggleModal(modal);
 
-	basketButtonLoad();
+	basketButtonLoad(product_id);
 }
 
 
 
 function toggleModal(modal){
   modal.classList.toggle('modal--hidden');
+closeModal(modal);
 }
 
+//Closes the Modal using the ESC key
+function closeModal(modal){
+document.onkeydown = function(evt) {
+	evt = evt || window.event;
+	if (evt.keyCode == 27) {
+			modal.classList.toggle('modal--hidden');
+	}
+}
+};
 
 
 function setListeners(){
@@ -155,6 +165,9 @@ function jsonModal(jsonObj) {
 	//Starts the loop
 	for( var i=0; i < json_output.length; i++) {
 
+		//Collects the products ID -- (THIS IS FOR THE BASKET!!)
+		var product_id = json_output[i].id;
+
 		var output 	= 	"<div id='item"										+	json_output[i].id  				+"' class='itemModal'>"	+
 						"<h2> Product Name: " 								+ 	json_output[i].name				+ "</h2>"				+
 						"<p><img src='../CMS/Images/" 						+	json_output[i].name 			+ ".jpg'></p>"			+
@@ -164,38 +177,72 @@ function jsonModal(jsonObj) {
 						"<p><span class='bold'>Category:</span> " 		+ 	json_output[i].category 		+ "</p>" 				+
 						"<p><span class='bold'>Price:£</span> " 		+ 	json_output[i].price 			+ "</p>"				+
 						"<p><span class='bold'>How many would you like: </span><input type ='number' id ='numberQuantity'> <span id='numberValidate'></span></p>"+
-						"<p><input 	type='button' value='Add to Basket!' id='addToBasket'><p>" 												+
+						"<p><input 	type='button' value='Add to Basket!' id='addToBasketButton'><p>" 												+
 						"</div>"																										+
 						"</div>";
 
 
 
-						injectIntoModal(output);
+						injectIntoModal(product_id, output);
 	}
 }
 
-function getBasketTotal(number){
-	var firstBasket = document.getElementById("basketTotal");
-	return firstBasket.innerHTML;
+//----------------------  WORKING  ON BASKET -------------------------
+
+//This clears local storage -- only called when needed - for test purposes
+function clearLocalStorage(){
+	localStorage.clear();
 }
 
-function setBasketTotal(number){
-	var firstBasket = document.getElementById("basketTotal");
-	firstBasket.innerHTML = number;
+//Sets the start value of the basket to Local Storage total
+function setBasketTotal(){
+	var localStorageLength = localStorage.length;
+	basketTotal.innerHTML = localStorageLength;
 }
 
-function basketButtonLoad(){
-	var addToBasketButton = document.getElementById('addToBasket');
+//Checks when the user clicks on the Add Baskey Button
+function basketButtonLoad(product_id){
+	var addToBasketButton = document.getElementById('addToBasketButton');
 	if(addToBasketButton){
-	addToBasketButton.addEventListener("click", basketFunction);
+			addToBasketButton.addEventListener("click", getProductToPutInBasket(product_id));
 		}
-	}
+}
+//Fires off an Ajax Request for the product the user wants to store in the database
+function getProductToPutInBasket(product_id){
 
-function basketFunction(){
-	console.log("add1");
-	setBasketTotal(+getBasketTotal() + 1);
+var xhr, changeListener;
+var data = product_id;
+
+xhr = new XMLHttpRequest();
+
+changeListener = function () {
+
+	if (xhr.readyState === 4 && xhr.status === 200) {
+		storeItemInLocalStorage(xhr.responseText);
+	}
+};
+
+xhr.open("GET", "ajax/sql/collectProductsBasketSQL.php?data="+data, true);
+xhr.onreadystatechange = changeListener;
+xhr.send();
+};
+
+//Stores the JSON object in Local Storage
+function storeItemInLocalStorage(jsonObj){
+
+	//Collects the product ID that I can store in Local Storage
+	var json_output_parse = JSON.parse(jsonObj);
+	for( var i=0; i < json_output_parse.length; i++) {
+				var product_id = json_output_parse[i].id;
+			}
+
+	//Stores it in Local Storage
+	var json_output_string = JSON.stringify(json_output_parse, null, '\t');
+	localStorage.setItem(product_id, json_output_string);
+
 }
 
-window.addEventListener("load", setBasketTotal(0));
+//-------------------EVENT LISTENERS-----------
+//window.addEventListener("load", clearLocalStorage());
+window.addEventListener("load", setBasketTotal());
 window.addEventListener("load", setListeners());
-//document.getElementById("searchBox").addEventListener('onkeyup', pageLoaded(document.getElementById("searchBox").value));

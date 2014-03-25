@@ -4,6 +4,7 @@ include("../../database/connect_database.php");
 
 
       $data = $_GET['data'];
+      $productNo = $_GET['productNo'];
 
       $index = preg_replace('/[^0-9.,]/', '', $data);
 
@@ -29,6 +30,8 @@ include("../../database/connect_database.php");
           array_push($output,$product);
 
          }
+
+        $output[0]['BasketTotal']=$productNo;
 
         $json_ouput = json_encode($output);
         echo $json_ouput;

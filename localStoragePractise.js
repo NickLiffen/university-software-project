@@ -86,3 +86,58 @@ setListeners = function() {
 
 window.addEventListener("load", setListeners);
 window.addEventListener("storage", storageEventHandler);
+
+
+
+
+
+
+
+
+
+
+
+function basket(product_id){
+  //Sets the number of basket to length of local storage
+  var localStorageLength = localStorage.length;
+  basketTotal.innerHTML = localStorageLength;
+
+
+  //Checks when the user clicks on the Add Baskey Button
+  var addToBasketButton = document.getElementById('addToBasketButton');
+  if(addToBasketButton){
+      addToBasketButton.addEventListener("click", function(product_id){
+
+          var xhr, changeListener;
+          var data = product_id;
+          //Creates a new XML Request.
+          xhr = new XMLHttpRequest();
+          //This runs on ready state change.
+          changeListener = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            storeItemInLocalStorage(xhr.responseText);
+          }
+        };
+
+          xhr.open("GET", "ajax/sql/collectProductsBasketSQL.php?data="+data, true);
+          xhr.onreadystatechange = changeListener;
+          xhr.send();
+        }, false);
+      }
+
+
+
+//Stores the JSON object in Local Storage
+function storeItemInLocalStorage(jsonObj){
+  //Collects the product ID that I can store in Local Storage
+  var json_output_parse = JSON.parse(jsonObj);
+  for( var i=0; i < json_output_parse.length; i++) {
+        var product_id = json_output_parse[i].id;
+      }
+  //Stores it in Local Storage
+  var json_output_string = JSON.stringify(json_output_parse, null, '\t');
+  localStorage.setItem(product_id, json_output_string);
+}
+
+
+}
