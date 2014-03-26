@@ -26,21 +26,17 @@ include("database/connect_database.php");
 				<ul>
 					<li><a href="index.php">Home</a></li>
 					<li><a href="search.php">Search</a></li>
-				</ul> 
-				<ul>
-					<li><a href="../CMS/index.php">CMS</a></li>
-					<li><a href="">Admin</a></li>
 				</ul>
-				
+
 				<ul class='basketSurrounding'>
 					<li><p>Basket Items: <span id ="basketTotal"></span></p></li>
 				</ul>
 			</nav>
-								
 
-							
+
+
 		</article>
-	
-					
+
+
 
 	</div>

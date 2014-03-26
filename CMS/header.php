@@ -19,23 +19,16 @@ include("database/connect_database.php");
 	<div id="box">
 
 <article>
-	
+
 <section class="header"><h1>Content Management System</h1></section>
-			
+
 						<nav>
 							<ul>
 								<li><a href="index.php">Products</a></li>
 								<li><a href="addproduct.php">Add Products</a></li>
 								<li><a href="updateproduct.php">Update Product Information</a></li>
 								<li><a href="deleteproduct.php">Delete Product</a></li>
-							</ul> 
-
-							<div id = "headerNew">
-							<ul>
-								<li><a href="../customer/index.php">Customer</a></li>
-								<li><a href="">Admin</a></li>
 							</ul>
-						</div>
 						</nav>
 </article>
 		</div>

@@ -73,29 +73,31 @@ function jsonModal(jsonObj) {
 	for( var i=0; i < json_output.length; i++) {
 		//Collects the products ID -- (THIS IS FOR THE BASKET!!)
 				var product_id = json_output[i].id;
-				//This is for the MODAL
-				var output 	= 	"<div id='item"											+	 json_output[i].id  				 +"' class='itemModal'>"	+
-								"<h2> Product Name: " 												+ 	json_output[i].name				 + "</h2>"								+
-								"<p><img src='../CMS/Images/" 								+	 json_output[i].name 				+ ".jpg'></p>"					 +
-								"<div id='pmodal'>"													 +
-								"<p><span class='bold'>Quantity:</span> " 		+ 	json_output[i].quantity 		+ "</p>" 								+
-								"<p><span class='bold'>Description:</span> "  + 	json_output[i].description  + "</p>" 								+
-								"<p><span class='bold'>Category:</span> " 		+ 	json_output[i].category 		+ "</p>" 								+
-								"<p><span class='bold'>Price: £</span> " 		 + 	json_output[i].price 			 + "</p>"								 +
-								"<p><span class='bold'>How many would you like: </span><input type ='number' id ='numberQuantityForProduct'> <span id='numberValidate'></span></p>"+
-								"<p><input type='button' value='Add to Basket!' id='addToBasketButton'><p>" 												+
-								"</div>"																			+
-								"</div>";
+				//Collects the product quantity -- (THIS IS FOR THE BASKET!!)
+					var productTotalInDB = json_output[i].quantity;
+						//This is for the MODAL
+						var output 	= 	"<div id='item"											+	 json_output[i].id  				 +"' class='itemModal'>"	+
+										"<h2> Product Name: " 												+ 	json_output[i].name				 + "</h2>"								+
+										"<p><img src='../CMS/Images/" 								+	 json_output[i].name 				+ ".jpg'></p>"					 +
+										"<div id='pmodal'>"													 +
+										"<p><span class='bold'>Quantity:</span> " 		+ 	json_output[i].quantity 		+ "</p>" 								+
+										"<p><span class='bold'>Description:</span> "  + 	json_output[i].description  + "</p>" 								+
+										"<p><span class='bold'>Category:</span> " 		+ 	json_output[i].category 		+ "</p>" 								+
+										"<p><span class='bold'>Price: £</span> " 		 + 	json_output[i].price 			 + "</p>"								 +
+										"<p><span class='bold'>How many would you like: </span><input type ='number' id ='numberQuantityForProduct'> <p><span id='numberValidate'></span></p><p><span id='numberValidateInDB'></span></p></p>"+
+										"<p><input type='button' value='Add to Basket!' id='addToBasketButton'><p>" 												+
+										"</div>"																			+
+										"</div>";
 
-								injectIntoModal(product_id, output);
+										injectIntoModal(product_id, productTotalInDB, output);
 			}
 };
 //Injects product information into Modal
-function injectIntoModal(product_id, data){
+function injectIntoModal(product_id, productTotalInDB, data){
 	var modal = document.querySelector(".modal");
 		modal.innerHTML = data;
 			toggleModal(modal);
-				basketButtonLoad(product_id);
+				basketButtonLoad(product_id, productTotalInDB);
 }
 //Toggles the Modal
 function toggleModal(modal){
@@ -113,35 +115,65 @@ function closeModal(modal){
 };
 
 //--------------------------BASKET----------------------
-//This clears local storage -- only called when needed - for test purposes
-function clearLocalStorage(){
-	localStorage.clear();
-}
-//Sets the start value of the basket to Local Storage total
+//Sets the start value of the basket to Local Storage total -- ON PAGE LOAD
 function setBasketTotal(){
 	var localStorageLength = localStorage.length;
 		basketTotal.innerHTML = localStorageLength;
 }
-//Checks when the user clicks on the Add To Basket Button and runs AJAX Request
-function basketButtonLoad(product_id){
+//Checks when the user clicks on the Add To Basket Button and validates the product quantity input.
+function basketButtonLoad(product_id, productTotalInDB){
 	var basketButton = _("addToBasketButton");
 		if(basketButton){
 				basketButton.addEventListener("click", function(){
-				//This is the AJAX
-				var xhr, changeListener;
-					var productNo = _("numberQuantityForProduct").value;
-						var data = product_id;
-							xhr = new XMLHttpRequest();
-				changeListener = function () {
-					if (xhr.readyState === 4 && xhr.status === 200) {
-								storeItemInLocalStorage(xhr.responseText);
+					var productQuantity = _('numberQuantityForProduct').value;
+						var errors = 0;
+					//Validation to see if input is greater then 0.
+				if(productQuantity < 1){
+					var productQuantityError = _('numberValidate');
+						productQuantityError.style.color="red";
+							productQuantityError.innerHTML = 'Must be greater then 0.';
+								errors = errors +1;
+						}
+					else{
+						var productQuantityError = _('numberValidate');
+							productQuantityError.innerHTML = '';
+					}
+					//Validates if there is enough in Stock.
+				if(productQuantity > productTotalInDB){
+					var productQuantityErrorinDB = _('numberValidateInDB');
+						productQuantityErrorinDB.style.color="red";
+							productQuantityErrorinDB.innerHTML = 'Sorry Not Enough in Stock.';
+								errors = errors +1;
 							}
-						};
-				xhr.open("GET", "ajax/sql/collectProductsBasketSQL.php?data="+data+"&productNo="+productNo, true);
-					xhr.onreadystatechange = changeListener;
-						xhr.send();
-					});
+					else{
+						var productQuantityErrorinDB = _('numberValidateInDB');
+							productQuantityErrorinDB.innerHTML = '';
+					}
+				//If no errors are found
+				if(errors > 0 ){
+					//
+					}
+					else{
+						console.log(errors);
+							basketAjax(product_id, productQuantity);
+					}
+			});
+		}
+}
+//Ajax Request that fires off to find product information to store in local storage.
+function basketAjax(product_id, productQuantity){
+	var xhr, changeListener;
+		var data = product_id;
+			var productNo = productQuantity;
+				xhr = new XMLHttpRequest();
+	changeListener = function () {
+		if (xhr.readyState === 4 && xhr.status === 200) {
+					storeItemInLocalStorage(xhr.responseText);
 				}
+			};
+	xhr.open("GET", "ajax/sql/collectProductsBasketSQL.php?data="+data+"&productNo="+productNo, true);
+		xhr.onreadystatechange = changeListener;
+			xhr.send();
 }
 //Stores the JSON object in Local Storage
 function storeItemInLocalStorage(jsonObj){
@@ -160,6 +192,12 @@ function increaseBasketNumber(){
 	var localStorageLength = localStorage.length;
 		basketTotal.innerHTML = localStorageLength;
 }
+//This clears local storage -- only called when needed - for test purposes
+function clearLocalStorage(){
+	localStorage.clear();
+}
+
+
 //-------------------EVENT LISTENERS-----------
 //window.addEventListener("load", clearLocalStorage());
 window.addEventListener("load", setBasketTotal());
