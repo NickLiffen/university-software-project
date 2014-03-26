@@ -97,7 +97,7 @@ function injectIntoModal(product_id, productTotalInDB, data){
 	var modal = document.querySelector(".modal");
 		modal.innerHTML = data;
 			toggleModal(modal);
-				basketButtonLoad(product_id, productTotalInDB);
+				basketButtonLoad(product_id, productTotalInDB, modal);
 }
 //Toggles the Modal
 function toggleModal(modal){
@@ -114,14 +114,14 @@ function closeModal(modal){
 		}
 };
 
-//--------------------------BASKET----------------------
+//--------------------------BASKET STORING----------------------
 //Sets the start value of the basket to Local Storage total -- ON PAGE LOAD
 function setBasketTotal(){
 	var localStorageLength = localStorage.length;
 		basketTotal.innerHTML = localStorageLength;
 }
 //Checks when the user clicks on the Add To Basket Button and validates the product quantity input.
-function basketButtonLoad(product_id, productTotalInDB){
+function basketButtonLoad(product_id, productTotalInDB, modal){
 	var basketButton = _("addToBasketButton");
 		if(basketButton){
 				basketButton.addEventListener("click", function(){
@@ -154,21 +154,20 @@ function basketButtonLoad(product_id, productTotalInDB){
 					//
 					}
 					else{
-						console.log(errors);
-							basketAjax(product_id, productQuantity);
+							basketAjax(product_id, productQuantity, modal);
 					}
 			});
 		}
 }
 //Ajax Request that fires off to find product information to store in local storage.
-function basketAjax(product_id, productQuantity){
+function basketAjax(product_id, productQuantity, modal){
 	var xhr, changeListener;
 		var data = product_id;
 			var productNo = productQuantity;
 				xhr = new XMLHttpRequest();
 	changeListener = function () {
 		if (xhr.readyState === 4 && xhr.status === 200) {
-					storeItemInLocalStorage(xhr.responseText);
+					storeItemInLocalStorage(xhr.responseText, modal);
 				}
 			};
 	xhr.open("GET", "ajax/sql/collectProductsBasketSQL.php?data="+data+"&productNo="+productNo, true);
@@ -176,7 +175,7 @@ function basketAjax(product_id, productQuantity){
 			xhr.send();
 }
 //Stores the JSON object in Local Storage
-function storeItemInLocalStorage(jsonObj){
+function storeItemInLocalStorage(jsonObj, modal){
 	//Collects the product ID which I use as a key
 	var json_output_parse = JSON.parse(jsonObj);
 		for( var i=0; i < json_output_parse.length; i++) {
@@ -185,16 +184,54 @@ function storeItemInLocalStorage(jsonObj){
 	//Actually Stores it in local storage
 	var json_output_string = JSON.stringify(json_output_parse, null, '\t');
 	localStorage.setItem(product_id, json_output_string);
-	increaseBasketNumber()
+	increaseBasketNumber(modal)
 }
 //Increase the basket number so it doesn't update only on load
-function increaseBasketNumber(){
+function increaseBasketNumber(modal){
 	var localStorageLength = localStorage.length;
 		basketTotal.innerHTML = localStorageLength;
+
+		closeModalOnProductComplete(modal)
 }
-//This clears local storage -- only called when needed - for test purposes
-function clearLocalStorage(){
-	localStorage.clear();
+//When the user adds the product to there basket it disappears
+function closeModalOnProductComplete(modal){
+	modal.classList.toggle('modal--hidden');
+}
+
+//------------------BASKET GETTING AND MODIFYING ---------------
+//
+function basketOnPageLoad(){
+	var getBasket = document.getElementsByClassName("basketSurrounding");
+	//When the user hovers over the basket
+	for(var i = 0, j=getBasket.length; i<j; i++){
+            getBasket[i].addEventListener("mouseover", function(){
+						if(localStorage.length == 0){
+							var test = _('basketTotalOnHover')
+							test.style.display = 'none';
+						}
+						else{
+							var test = _('basketTotalOnHover')
+							test.style.display = 'block';
+							listAllItems(test);
+						}
+						});
+				}
+	//When the user hovers off the basket
+	for(var i = 0, j=getBasket.length; i<j; i++){
+						getBasket[i].addEventListener("mouseout", function(){
+							var test = _('basketTotalOnHover')
+							test.style.display = 'none';
+						});
+				}
+			}
+
+//Gets all the keys from local storage
+function listAllItems(test){
+    for (i=0; i<=localStorage.length-1; i++)
+    {
+        key = localStorage.key(i);
+        test.innerHTML += localStorage.getItem(key);
+    }
 }
 
 
@@ -203,3 +240,4 @@ function clearLocalStorage(){
 window.addEventListener("load", setBasketTotal());
 window.addEventListener("load", pageLoaded);
 window.addEventListener("load", setListeners());
+window.addEventListener("load", basketOnPageLoad());

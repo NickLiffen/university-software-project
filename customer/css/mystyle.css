@@ -112,8 +112,21 @@ body {
 	font-weight: bold;
 }
 .basketSurrounding{
-	margin-right: 20px;
+	margin-right: 10px;
 	float:right;
+}
+.basketSurrounding img{
+	height: 25px;
+	width: 25px;
+}
+#basketTotalOnHover{
+	display: none;
+	position:absolute;
+	left:80%;
+	border:2px solid #a1a1a1;
+	background:#dddddd;
+	border-radius:25px;
+	height: 100px;
 }
 /* navigation Bar CSS
 ------------------------------------------*/

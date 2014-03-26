@@ -29,11 +29,11 @@ include("database/connect_database.php");
 				</ul>
 
 				<ul class='basketSurrounding'>
-					<li><p>Basket Items: <span id ="basketTotal"></span></p></li>
+					<li><p><img src="basket_image.png" alt="Basket"><span id ="basketTotal"></span></p></li>
 				</ul>
 			</nav>
 
-
+<div id ='basketTotalOnHover'></div>
 
 		</article>
 
