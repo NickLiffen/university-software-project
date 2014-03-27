@@ -111,6 +111,10 @@ body {
 .bold {
 	font-weight: bold;
 }
+.centre {
+	text-align: center;
+	margin-left: 16%;
+}
 .basketSurrounding{
 	margin-right: 10px;
 	float:right;
@@ -123,11 +127,13 @@ body {
 	display: none;
 	position:absolute;
 	left:80%;
+	top:18%;
 	border:2px solid #a1a1a1;
 	background:#dddddd;
 	border-radius:25px;
-	height: 100px;
+	opacity: 0.99;
 }
+
 /* navigation Bar CSS
 ------------------------------------------*/
 nav {
