@@ -152,9 +152,8 @@ function basketButtonLoad(product_id, productTotalInDB, modal) {
                 productQuantityErrorinDB.innerHTML = '';
             }
             //If no errors are found
-						console.log("The total number of errors are:" + errors);
             if (errors > 0) {
-							return false;
+							console.log("The total number of errors are:" + errors);
             } else {
                 basketAjax(product_id, productQuantity, modal);
             }
