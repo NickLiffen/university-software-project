@@ -74,7 +74,7 @@ function jsonModal(jsonObj) {
         //Collects the products ID -- (THIS IS FOR THE BASKET!!)
         var product_id = json_output[i].id;
         //Collects the product quantity -- (THIS IS FOR THE BASKET!!)
-        var productTotalInDB = json_output[i].quantity;
+        var productTotalInDB = +json_output[i].quantity;
         //This is for the MODAL
         var output = "<div id='item" + json_output[i].id + "' class='itemModal'>" +
             "<h2> Product Name: " + json_output[i].name + "</h2>" +
@@ -120,14 +120,12 @@ function setBasketTotal() {
     var localStorageLength = localStorage.length;
     basketTotal.innerHTML = localStorageLength;
 }
-//THE BUG IS HERE!!!!!!
-
 //Checks when the user clicks on the Add To Basket Button and validates the product quantity input.
 function basketButtonLoad(product_id, productTotalInDB, modal) {
     var basketButton = _("addToBasketButton");
     if (basketButton) {
         basketButton.addEventListener("click", function () {
-            var productQuantity = _('numberQuantityForProduct').value;
+            var productQuantity = +_('numberQuantityForProduct').value;
             var errors = 0;
 						console.log("The number of products the user wants to add to there basket:" + productQuantity);
 						console.log("The total products in DB are:" + productTotalInDB);
