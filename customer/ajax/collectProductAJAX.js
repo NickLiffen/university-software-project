@@ -120,6 +120,8 @@ function setBasketTotal() {
     var localStorageLength = localStorage.length;
     basketTotal.innerHTML = localStorageLength;
 }
+//THE BUG IS HERE!!!!!!
+
 //Checks when the user clicks on the Add To Basket Button and validates the product quantity input.
 function basketButtonLoad(product_id, productTotalInDB, modal) {
     var basketButton = _("addToBasketButton");
