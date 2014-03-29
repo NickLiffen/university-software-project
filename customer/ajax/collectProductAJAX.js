@@ -127,11 +127,8 @@ function basketButtonLoad(product_id, productTotalInDB, modal) {
         basketButton.addEventListener("click", function () {
             var productQuantity = +_('numberQuantityForProduct').value;
             var errors = 0;
-						console.log("The number of products the user wants to add to there basket:" + productQuantity);
-						console.log("The total products in DB are:" + productTotalInDB);
             //Validation to see if input is greater then 0.
             if (productQuantity < 1) {
-							  console.log("User entered a value less then 0");
                 var productQuantityError = _('numberValidate');
                 productQuantityError.style.color = "red";
                 productQuantityError.innerHTML = 'Please enter a quantity number';
@@ -142,7 +139,6 @@ function basketButtonLoad(product_id, productTotalInDB, modal) {
             }
             //Validates if there is enough in Stock.
             if (productQuantity > productTotalInDB) {
-								console.log("Error: Not enough in Stock");
                 var productQuantityErrorinDB = _('numberValidateInDB');
                 productQuantityErrorinDB.style.color = "red";
                 productQuantityErrorinDB.innerHTML = 'Sorry Not Enough in Stock.';
@@ -153,7 +149,7 @@ function basketButtonLoad(product_id, productTotalInDB, modal) {
             }
             //If no errors are found
             if (errors > 0) {
-							console.log("The total number of errors are:" + errors);
+                //
             } else {
                 basketAjax(product_id, productQuantity, modal);
             }
@@ -184,7 +180,7 @@ function storeItemInLocalStorage(jsonObj, modal) {
     }
     //Actually Stores it in local storage
     var json_output_string = JSON.stringify(json_output_parse, null, '\t');
-    localStorage.setItem(product_id, json_output_string);
+    localStorage.setItem("item" + product_id, json_output_string);
     increaseBasketNumber(modal)
 }
 //Increase the basket number so it doesn't update only on load
@@ -192,57 +188,59 @@ function increaseBasketNumber(modal) {
     var localStorageLength = localStorage.length;
     basketTotal.innerHTML = localStorageLength;
     closeModalOnProductComplete(modal)
-		listAllItems();
+    listAllItems();
 }
 //When the user adds the product to there basket it disappears
 function closeModalOnProductComplete(modal) {
-    modal.classList.toggle('modal--hidden');
+    if (modal) {
+        modal.classList.toggle('modal--hidden');
+    }
 }
 
 //------------------BASKET GETTING AND MODIFYING ---------------
 /* This function prints everything out when the user hovers over the basket. This function doesnt actually do the hovering but it injects it into a DIV. When the user hovers over the basket this is shown.*/
 function listAllItems() {
-    var test = _('basketTotalOnHover')
-		test.innerHTML = '';
+  var target = _('basketTotalOnHover');
+  //This clears the basket. Every time they hover over it it starts off empty and not what they saw last time.
+  target.innerHTML = "";
     for (var a in localStorage) {
         var json_output = JSON.parse(localStorage[a]);
         for (var i = 0; i < json_output.length; i++) {
-					//Collects the products ID -- (THIS IS FOR REMOVING IT FROM BASKET)
-					var removeProductID = json_output[i].id;
+            var productTotalInDB = +json_output[i].quantity;
             var output =
-                "<h2><span class='bold'>Product Name:</span> " + json_output[i].name + '</h2>' +
+                "<div id='item" + json_output[i].id + "'>" +
+                "<h3><span class='bold'>Product Name:</span> " + json_output[i].name + '</h3>' +
                 "<p><span class='bold'>Product Price: £</span>" + json_output[i].price + '</p>' +
-                "<p><span class='bold'>Quantity In Basket:</span>" + json_output[i].BasketTotal + '</p>' +
+                "<p><span class='bold'>Quantity In Basket:</span> <input type='number' class='modifyQuantityInLocalStorage' value ='" + json_output[i].BasketTotal + "'</p>" +
                 "<p><span class='bold'>Total Cost: £</span>" + (json_output[i].price * json_output[i].BasketTotal) + '</p>' +
-                "<p><span class='centre'><input type='button' id='removeProductFromBasket' value='Remove'/><input type='button' id='modifyQuantity' value='Modify Quantity'/></span></p>";
-            test.innerHTML += output;
+                "<p><span class='centre'><input type='button' class='removeProductFromBasket' value='Remove'/><input type='button' class='modifyQuantity' value='Modify'/></span></p>" +
+                "</div>";
+
+                target.innerHTML += output;
         }
     }
-    basketOnHoverLoad(removeProductID);
+    basketOnHoverLoad(productTotalInDB, target);
 }
 /* This function waits and sees when the user hovers over the basket, when they do, a DIV is made visible. When the user hovers away from the basket the div is hidden. This function also allows the user to hover over the div to
 amend there product information.*/
-function basketOnHoverLoad(removeProductID) {
+function basketOnHoverLoad(productTotalInDB, target) {
     var getBasket = document.getElementsByClassName("basketSurrounding");
     //When the user hovers over the basket and div showing prodict information
     for (var i = 0, j = getBasket.length; i < j; i++) {
         getBasket[i].addEventListener("mouseover", function () {
             if (localStorage.length == 0) {
-                var test = _('basketTotalOnHover')
-                test.style.display = 'none';
+                target.style.display = 'none';
             } else {
-                test = _('basketTotalOnHover')
-                test.style.display = 'block';
+                target.style.display = 'block';
             }
             /*This adds the event listener to the div showing the product information, the reason this is here is
 						becuase this div should only be accesible from when the user is hovering over the basket*/
             test.addEventListener("mouseover", function () {
                 if (localStorage.length == 0) {
-                    var test = _('basketTotalOnHover')
-                    test.style.display = 'none';
+                    target.style.display = 'none';
                 } else {
                     test = _('basketTotalOnHover')
-                    test.style.display = 'block';
+                    target.style.display = 'block';
                 }
             })
         });
@@ -255,25 +253,82 @@ function basketOnHoverLoad(removeProductID) {
     //This makes the basket hidden then the user hovers away from the basket image
     for (var i = 0, j = getBasket.length; i < j; i++) {
         getBasket[i].addEventListener("mouseout", function () {
-            var test = _('basketTotalOnHover')
+            var test = _('basketTotalOnHover');
             test.style.display = 'none';
         });
     }
-		removeProductLocalStorage(removeProductID);
+    changesInBasket(productTotalInDB);
 }
-//This function removes a product once the user has clicked on the 'remove button'
-function removeProductLocalStorage(removeProductID){
-	var getRemoveButton = _("removeProductFromBasket");
-	if(getRemoveButton){
-		getRemoveButton.addEventListener("click", function(){
-			localStorage.removeItem(removeProductID);
-			increaseBasketNumberAfterRemove();
-		});
-	}
+/*This function removes a product once the user has clicked on the 'remove button' and also modifies
+the amount of a certain product they have got in the basket */
+function changesInBasket(productTotalInDB) {
+    //Gets the button that says 'Remove'
+    var getRemoveButton = document.getElementsByClassName("removeProductFromBasket");
+    //Gets the button that says 'Modify'
+    var getModifyButton = document.getElementsByClassName("modifyQuantity");
+    //Delete Local Storage.
+    for (var i = 0, j = getRemoveButton.length; i < j; i++) {
+        getRemoveButton[i].addEventListener("click", function (event) {
+            //Bubbles up and finds the ID, then deletes it.
+            var e = event.target;
+            while (e.id.indexOf('item') == -1) {
+                e = e.parentNode;
+            }
+            var data = e.id;
+            console.log("Delete Product ID: " + data);
+            //This removes the product from local storage
+            localStorage.removeItem(data);
+            //This shows the message saying the product has been deleted
+            var showDelete = _("productDeleteShow").style.display = 'block';
+            //This sets the timeout that makes the message disapear after 3 seconds.
+            window.setTimeout(vanishText, 1000);
+        }, false);
+    }
+    //Modify Local Storage
+    for (var i = 0, j = getModifyButton.length; i < j; i++) {
+            getModifyButton[i].addEventListener("click", function (event) {
+            var newQuantity = document.getElementsByClassName("modifyQuantityInLocalStorage");
+            for(var i = 0;i < newQuantity.length;i++){
+                var finalNumber = newQuantity[i].value;
+                }
+            //Bubbles up and finds the ID of the product they want to modify
+            var e = event.target;
+            while (e.id.indexOf('item') == -1) {
+                e = e.parentNode;
+            }
+            var data = e.id;
+            var totalinDB = productTotalInDB;
+            console.log("Modify Product ID: " + data);
+            console.log("Amount in DB: " + totalinDB);
+            console.log("Basket Quantity: " + finalNumber);
+            //Checks to see if there is enough in stock, if not then it fails.
+            if (finalNumber > totalinDB) {
+                var textHere = _("changeQuantityInBasketFail");
+                textHere.innerHTML = "<h1>Not enough in Stock - Maxium:" + totalinDB + "</h1>";
+                textHere.style.display = 'block';
+                window.setTimeout(notLoad, 4000);
+            } else {
+                basketAjax(data, finalNumber)
+                var showModify = _("productModifyShow").style.display = 'block';
+                window.setTimeout(vanishText, 1000);
+            }
+        });
+    }
 }
+function notLoad(){
+  var showModify = _("changeQuantityInBasketFail").style.display = 'none';
+}
+//Makes the text that comes up saying 'Product Deleted' display none.
+function vanishText() {
+    var showDelete = _("productDeleteShow").style.display = 'none';
+    var showDelete = _("productModifyShow").style.display = 'none';
+    increaseBasketNumberAfterRemove();
+}
+
 function increaseBasketNumberAfterRemove() {
-		var localStorageLength = localStorage.length;
-		basketTotal.innerHTML = localStorageLength;
+    var localStorageLength = localStorage.length;
+    basketTotal.innerHTML = localStorageLength;
+    listAllItems();
 }
 //-------------------EVENT LISTENERS-----------
 window.addEventListener("load", setBasketTotal());

@@ -134,6 +134,33 @@ body {
 	opacity: 0.99;
 }
 
+#productDeleteShow{
+ postion: absolute;
+ display: none;
+ font-size: 100px;
+ text-align: center;
+ top: 18%;
+ color: red;
+}
+#productModifyShow{
+	postion: absolute;
+	display: none;
+	font-size: 100px;
+	text-align: center;
+	top: 18%;
+	color: red;
+}
+#changeQuantityInBasketFail{
+	postion: absolute;
+	display: none;
+	font-size: 100px;
+	text-align: center;
+	top: 18%;
+	color: red;
+}
+.modifyQuantityInLocalStorage{
+	width: 40px;
+}
 /* navigation Bar CSS
 ------------------------------------------*/
 nav {
@@ -186,6 +213,13 @@ h1 {
 	font-size: 23px;
 }
 h2 {
+	display:block;
+	text-align: center;
+	padding-bottom: 15px;
+	padding-top: 15px;
+	font-size: 20px;
+}
+h3 {
 	display:block;
 	text-align: center;
 	padding-bottom: 15px;

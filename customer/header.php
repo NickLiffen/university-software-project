@@ -31,9 +31,9 @@ include("database/connect_database.php");
 				<ul class='basketSurrounding'>
 					<li><p><img src="basket_image.png" alt="Basket"><span id ="basketTotal"></span></p></li>
 				</ul>
+				<div id ='basketTotalOnHover'></div>
 			</nav>
 
-<div id ='basketTotalOnHover'></div>
 
 		</article>
 
