@@ -1,4 +1,4 @@
-/* Main CSS 
+/* Main CSS
 ------------------------------------------*/
 * {
 	margin: 0;
@@ -62,11 +62,59 @@ body {
 .run {
 	padding-left: 20px;
 }
+#searchbox {
 
+	text-align: center;
+	border: 10px solid transparent;
+	vertical-align:top;
+}
+.item{
+	width: 31%;
+	margin-right: 2%;
+	float: left;
+	margin-bottom: 70px;
+}
+
+.item p{
+	margin: 0 0 0 0;
+	padding: 0;
+	text-align: center;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.item h2 {
+	text-align: center;
+}
+
+.item img{
+	width: 100%;
+	height: 200px;
+	width: 200px;
+}
+
+#productDeleteShow{
+	  display: none;
+    postion: absolute;
+	  display: none;
+	  font-size: 10px;
+		text-align: center;
+		top: 18%;
+		color: red;
+}
+#productModifyShow{
+	display: none;
+	postion: absolute;
+	display: none;
+	font-size: 10px;
+	text-align: center;
+	top: 18%;
+	color: red;
+}
 /* navigation Bar CSS
 ------------------------------------------*/
 nav {
-	margin: 10px auto; 
+	margin: 10px auto;
 	text-align: center;
 	padding-bottom: 10px;
 	border-bottom: solid;
@@ -77,14 +125,14 @@ nav ul {
 	background: #fff;
 	box-shadow: 0px 0px 9px rgba(0,0,0,0.15);
 	padding:  0px;
-	border-radius: 10px;  
+	border-radius: 10px;
 	list-style: none;
 	position: relative;
 	display: inline-table;
 }
 
 nav ul li:hover {
-	
+
 	font-weight:bold;
 }
 nav ul li:hover a {
@@ -103,7 +151,7 @@ nav ul li a {
 ------------------------------------------*/
 
 h1 {
-	
+
 	display:block;
 	text-align: left;
 	padding-bottom:15px;
@@ -124,7 +172,7 @@ section
 	padding: 1em;
 	padding-right: 2em;
 	color: black;
-	
+
 }
 p
 {
@@ -141,7 +189,7 @@ footer
 	border-width: 1px;
 	padding-top: 15px;
 	position: absolute;
-	
+
 }
 
 fieldset {
@@ -174,12 +222,12 @@ legend span {
 
 /* Listing
 ------------------------------------------*/
-ul 
+ul
 {
 	padding-bottom: 10px;
 	padding-left: 10px;
 }
-ul>li 
+ul>li
 {
 	padding: 5px;
 }
@@ -189,17 +237,10 @@ ul>li
 /* Header for Overall document
 ------------------------------------------*/
 
-section.header h1 
+section.header h1
 {
 			text-align: center;
 			font-size: 35px;
 			padding-bottom: 1px;
 			padding-top: 1px;
 }
-
-
-
-	
-
-
-

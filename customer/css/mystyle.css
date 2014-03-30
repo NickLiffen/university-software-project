@@ -134,21 +134,10 @@ body {
 	opacity: 0.99;
 }
 
-#productDeleteShow{
- postion: absolute;
- display: none;
- font-size: 100px;
- text-align: center;
- top: 18%;
- color: red;
-}
 #productModifyShow{
 	postion: absolute;
 	display: none;
-	font-size: 100px;
-	text-align: center;
-	top: 18%;
-	color: red;
+	color: blue;
 }
 #changeQuantityInBasketFail{
 	postion: absolute;
