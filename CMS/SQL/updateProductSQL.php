@@ -1,9 +1,9 @@
 <?php
   include("../../database/connect_database.php");
 
-    $name = $_GET['name'];
+    $name = $_GET['id'];
 
-    $query = "SELECT * FROM products WHERE product_name = '$name'";
+    $query = "SELECT * FROM products WHERE id = '$name'";
 
     $result = $database->query($query) OR die("Failed query $query");
   echo $database->error;

@@ -26,9 +26,7 @@ include("database/connect_database.php");
 							<ul>
 								<li><a href="index.php">Products</a></li>
 								<li><a href="addproduct.php">Add Products</a></li>
-								<li><a href="updateproduct.php">Update Product Information</a></li>
-								<li><a href="deleteproduct.php">Delete Product</a></li>
-								<li><a href="search.php">Search For a Product</a></li>
+								<li><a href="search.php">Modify and Remove</a></li>
 							</ul>
 						</nav>
 </article>
