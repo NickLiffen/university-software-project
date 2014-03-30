@@ -15,3 +15,7 @@ include("inc/header.php");
 
 <!--Collects the Results back from the search bar.-->
 <script src="js/searchBarResults.js"></script>
+<!--Collects the Results back from the search bar.-->
+<script src="js/modify.js"></script>
+<!--Collects the Results back from the search bar.-->
+<script src="js/delete.js"></script>
