@@ -1,5 +1,6 @@
 <?php
 	include("../../database/connect_database.php");
+
 	header('Content-Type: application/json');
 
 	$query = "SELECT * FROM products ORDER BY id DESC LIMIT 9";
@@ -24,8 +25,4 @@
 
         $json_ouput = json_encode($output);
         echo $json_ouput;
-		
-
-
-
 ?>

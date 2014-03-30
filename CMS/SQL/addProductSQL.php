@@ -7,12 +7,12 @@
         $data = stripslashes($data);
         $data = htmlspecialchars($data);
         return $data;
-    }          
+    }
 
 
 
 	if (empty($_FILES['file1']['name'])) {
-    
+
     	//Reciving the Text fields
     $name = test_input($_POST['name']);
     $quantity = test_input($_POST['quantity']);
@@ -48,19 +48,18 @@ else {
 
 
 
- 
-		if (!$fileTmpLoc) { 
+
+		if (!$fileTmpLoc) {
     		echo "";
     		exit();
 			}
 
-		if(move_uploaded_file($fileTmpLoc, "../../Images/$name.jpg")){
+		if(move_uploaded_file($fileTmpLoc, "../images/$name.jpg")){
    		 	echo "";
-			} 			
+			}
 			else {
    					 echo "";
 				}
-
 
 
     //Adds information to database
