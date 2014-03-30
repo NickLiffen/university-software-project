@@ -61,7 +61,9 @@ function basketOnHoverLoad(productTotalInDB, target) {
     changesInBasket(productTotalInDB);
 }
 /*This function removes a product once the user has clicked on the 'remove button' and also modifies
-the amount of a certain product they have got in the basket */
+the amount of a certain product they have got in the basket. I tried to use getElementByID but that
+didn't work. When i do the classes it workes for delete but not for modify. It isn't getting the
+correct values for old and new quantity. */
 function changesInBasket(productTotalInDB) {
     //Gets the button that says 'Remove'
     var getRemoveButton = document.getElementsByClassName("removeProductFromBasket");
@@ -93,10 +95,12 @@ function changesInBasket(productTotalInDB) {
                   e = e.parentNode;
               }
               var product_id = e.id;
-              //Loops through to collect the value of the new quantity.
+
+              //Loops through to collect the value of the new quantity. THINK THIS IS WRONG
               var newQuantity = document.getElementsByClassName("modifyQuantityInLocalStorage");
-                for(var i = 0;i < newQuantity.length;i++){
+                for(var i = 0, j = newQuantity.length; i < j; i++){
                   var newValue = newQuantity[i].value;
+                  console.log(newValue);
                 }
 
             var totalinDB = productTotalInDB;
