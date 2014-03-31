@@ -1,3 +1,4 @@
+//Sends though the ID of the product that the user wants to UPDATE.
 function ajaxModify(productID, str, target){
   var xhr, id
   xhr = new XMLHttpRequest();
@@ -12,15 +13,17 @@ xhr.open("GET", "SQL/updateProductSQL.php?id="+id, true);
 xhr.onreadystatechange = changeListener;
 xhr.send();
 }
-
+//Shows the new form that allows the user to enter in the new information.
 function updateProduct(jsonObj, str, target) {
   var json_output = JSON.parse(jsonObj);
+  //Removes all other products from the page. Focuses the user on that one specific update form.
   target.innerHTML="";
   var newTarget = document.getElementById("modifyResult");
+  //Removes all other forms that have been on the page before. The user only wants to see the current form not all the previous ones.
   newTarget.innerHTML = "";
   newTarget.style.display = "block";
 
-  //Starts the loop
+  //Starts the loop and prints out the form.
   for( var i=0; i < json_output.length; i++) {
 
     var output 	= 	"<fieldset><legend><span>Would you like to Update a product?</span></legend>"+
@@ -42,7 +45,7 @@ function updateProduct(jsonObj, str, target) {
           }
           finalUpdate(str, newTarget);
   }
-
+//Sends through the final information to be updated.
 function finalUpdate(str, newTarget){
 var fetchSubmitButton = document.getElementById("submitNew");
   if(fetchSubmitButton) {
@@ -74,7 +77,7 @@ var fetchSubmitButton = document.getElementById("submitNew");
       });
     }
 }
-
+//Shows the user the modified message.
 function modifyMessage(str, newTarget){
   newTarget.style.display = "none";
   var messsage = _("productModifyShow").style.display = "block";

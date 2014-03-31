@@ -1,10 +1,10 @@
 <?php
 include("../../database/connect_database.php");
-
+				//Query that finds the total number of products that the user has added.
 				$query = "SELECT count(id) as 'totalOne' FROM products";
 				$result = $database->query($query);
 				while($row = mysqli_fetch_array($result)) {
-				echo "<li>Total Number of products: ". $row ['totalOne'] ."\r\n</li>";
+				$totalProducts = $row['totalOne'];
 			}
-
+			echo $totalProducts;
 ?>

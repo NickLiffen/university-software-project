@@ -5,7 +5,9 @@ include("inc/header.php");
 <article>
 	<section>
 			<fieldset><legend><span>Would you like to add a Product?</span></legend>
+				<!--This prints out the success message for the product being added to the database-->
 				<form method="post" id = "myForm" name="myForm" enctype="multipart/form-data" onsubmit="return false">
+					<div class='alignLeft'>
 					<br> &nbsp;
 					<p>Please Enter a Product Name:*    					<input type="text" id="name" 		name="name" 		placeholder="Name" 			 /> 			<span id="errorname"></span>  			<span class="error">	<?php echo $nameErr;?>			</span>	</p>
 					<p>Please enter the quantity of the product you have:* 	<input type="number" id="quantity" 	name="quantity" 	placeholder="Quantity" 		 /> 		<span id="errorquantity"></span> 		<span class="error"> 	<?php echo $quantityErr;?>		</span>	</p>
@@ -16,10 +18,15 @@ include("inc/header.php");
 					<br> &nbsp;
 					<p>Everything marked with a * is a mandatory field</p>
 					<input name="submit" id ="submit" type="button" value="Add Product"/>
+					<!--This is where the success message gets printed out when they have added the product.-->
+					<div id='productAddedSuccessfully'></div>
+				</div>
 				</form>
-				<!--This prints out the success message for the product being added to the database-->
+				<div class='alignRight'>
+					<!--This prints out the product which they have just added.-->
 				<div id="status"></div>
-			 </fieldset>
+				</div>
+			</fieldset>
 	</section>
 </article>
 <!--This is the AJAX function that adds the product to the database.-->

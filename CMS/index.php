@@ -3,24 +3,26 @@ $title = "Index";
 include("inc/header.php");
 ?>
 		<div id="h3padding"><h3>Summary of Products:</h3></div>
-			<p>Find out information about products you have added</p>
+		<p class='floatLeftAndStyle'>From this Content Managment System you will be able to add/delete/update products. Navagte your way around by the navagation bar above. This page shows you basic information about your proucts.</p>
+		<!--This is where the results to the questions above get answered.-->
+		<div class='floatLeft'>
+				<div class='paddingBottom'></div>
+			<p>Information about the products you have...</p>
 				<div id="run">
 					<ul>
-						<li>Total products you have?<input type = "button" id= "totalProdcts" value = "Search"></li>
-						<li>Total stock of all products?<input type = "button" id = "totalStock" value = "Search"></li>
-						<li>Product with the most stock?<input type = "button" id = "maxStock" value = "Search"></li>
-						<li>Product with the least stock?<input type = "button" id = "minStock" value = "Search"></li>
+						<li>Total products you have:     <div id="totalProdctsNew"></div></li>
+						<li>Total stock of all products: <div id="totalStockNew"></div></li>
+						<li>Product with the most stock: <div id="maxStockNew"></div></li>
+						<li>Product with the least stock:<div id="minStockNew"></div></li>
 					</ul>
-		<!--This is where the results to the questions above get answered.-->
-		<div id = "results"></div>
-		</div>
-
+				</div>
+			</div>
 		<!--This is here becuasue it prints out any products that have no stock remaining.-->
-		<h2>These products all have no stock remaining!!!!!!</h2>
+		<div id="h3padding"><h3>These products all have no stock remaining!</h3></div>
 		<div id= "noStock"></div>
 
-<!--AJAX function that loads all of the questions above and the NO stock left query.-->
-<script src = "js/fetchProductsInfo.js"></script>
+		<!--AJAX function that loads all of the questions above and the NO stock left query.-->
+		<script src = "js/fetchProductsInfo.js"></script>
 <?php
 include("inc/footer.php");
 ?>

@@ -11,9 +11,22 @@ body {
   font-family: sans-serif;
   font-size: 17px;
 }
-
+.alrighRight{
+	float:right;
+	padding-right:150px;
+}
+.alignLeft{
+	float:left;
+}
+#searchbox {
+	text-align: center;
+	border: 10px solid transparent;
+	vertical-align:top;
+}
+.mytext {
+	width: 300px;
+}
 #loop {
-
 	padding-bottom: 10px;
 }
 
@@ -23,13 +36,14 @@ body {
 	background-color: #eee;
 }
 #headerNew {
-
 	float: right;
-
 }
 #h3padding {
 
 	padding-bottom: 20px;
+	padding-left: 20px;
+}
+#noStock{
 	padding-left: 20px;
 }
 
@@ -42,13 +56,16 @@ body {
 	width: 31%;
 	margin-right: 2%;
 	float: left;
-	margin-bottom: 30px;
+	margin-bottom: 70px;
 }
 
 .item p{
 	margin: 0 0 0 0;
 	padding: 0;
 	text-align: center;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 .item h3 {
 	text-align: center;
@@ -61,6 +78,11 @@ body {
 }
 .run {
 	padding-left: 20px;
+}
+.noResults{
+	text-align: center;
+	color:red;
+	font-size:20px;
 }
 #searchbox {
 
@@ -92,7 +114,9 @@ body {
 	height: 200px;
 	width: 200px;
 }
-
+.paddingBottom{
+	padding-bottom: 20px;
+}
 #productDeleteShow{
 	  display: none;
     postion: absolute;
@@ -100,7 +124,7 @@ body {
 	  font-size: 25px;
 		text-align: center;
 		top: 18%;
-		color: red;
+		color: green;
 }
 #productModifyShow{
 	display: none;
@@ -109,7 +133,24 @@ body {
 	font-size: 25px;
 	text-align: center;
 	top: 18%;
-	color: red;
+	color: green;
+}
+#productAddedSuccessfully{
+	display: none;
+	postion: absolute;
+	display: none;
+	font-size: 25px;
+	padding-left: 10px;
+	top: 18%;
+	color: green;
+}
+.floatLeft{
+	padding-left: 20px;
+}
+.floatLeftAndStyle{
+	padding-left: 20px;
+	font-style: italic;
+	font-weight:bold;
 }
 /* navigation Bar CSS
 ------------------------------------------*/

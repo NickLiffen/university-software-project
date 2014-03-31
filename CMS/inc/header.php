@@ -9,25 +9,23 @@
 <meta http-equiv="Content-Script-Type" content="text/javascript">
 <link rel="stylesheet" type="text/css" href="css/mystyle.css">
 <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-
-<?php
-include("database/connect_database.php");
-?>
-
+<?php include( "database/connect_database.php"); ?>
 
 <body>
-	<div id="box">
-
-<article>
-
-<section class="header"><h1>Content Management System</h1></section>
-
-						<nav>
-							<ul>
-								<li><a href="index.php">Products</a></li>
-								<li><a href="addproduct.php">Add Products</a></li>
-								<li><a href="search.php">Modify and Remove</a></li>
-							</ul>
-						</nav>
-</article>
-		</div>
+    <div id="box">
+        <article>
+            <section class="header">
+                <h1>Content Management System</h1>
+            </section>
+            <nav>
+                <ul>
+                    <li><a href="index.php">Products</a>
+                    </li>
+                    <li><a href="addproduct.php">Add Products</a>
+                    </li>
+                    <li><a href="search.php">Modify and Remove</a>
+                    </li>
+                </ul>
+            </nav>
+        </article>
+    </div>

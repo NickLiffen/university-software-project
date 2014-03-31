@@ -25,7 +25,7 @@ function json(jsonObj, target) {
     for (var i = 0; i < json_output.length; i++) {
         var output = "<div id='item" + json_output[i].id + "' class='item'>" +
             "<h2> Product Name: " + json_output[i].name + '</h2>' +
-            "<p><img src='../CMS/images/" + json_output[i].name + ".jpg'> </p>" +
+            "<p><img src='../CMS/images/" + json_output[i].id + ".jpg'> </p>" +
             "<p> Amount in Stock: " + json_output[i].quantity + '</p>' +
             "<p> Product Description: " + json_output[i].description + '</p>' +
             "<p> Product Category: " + json_output[i].category + '</p>' +

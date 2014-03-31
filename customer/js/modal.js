@@ -41,7 +41,7 @@ function jsonModal(jsonObj) {
         //This is for the MODAL
         var output = "<div id='item" + json_output[i].id + "' class='itemModal'>" +
             "<h2> Product Name: " + json_output[i].name + "</h2>" +
-            "<p><img src='../CMS/Images/" + json_output[i].name + ".jpg'></p>" +
+            "<p><img src='../CMS/Images/" + json_output[i].id + ".jpg'></p>" +
             "<div id='pmodal'>" +
             "<p><span class='bold'>Amount in Stock:</span> " + json_output[i].quantity + "</p>" +
             "<p><span class='bold'>Description:</span> " + json_output[i].description + "</p>" +
