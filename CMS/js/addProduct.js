@@ -45,6 +45,7 @@ changeListener = function () {
 }
 //Formatting the way that I want my data to be presnted.
 function json(jsonObj, target){
+  console.log(jsonObj);
   var json_output = JSON.parse(jsonObj);
   target.innerHTML = "";
   target.innterHTML = "Product Added Successfully.";

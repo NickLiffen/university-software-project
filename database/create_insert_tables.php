@@ -12,9 +12,26 @@ $create_table_products =
 
 				PRIMARY KEY(ID)
 													  )";
-													  
+
 if(!$result = $database->query($create_table_products)){
     die('Could not create product table [' . $database->error . ']');
+	$result->close();
+}
+
+$create_table_address =
+				"CREATE TABLE IF NOT EXISTS address (
+				id MEDIUMINT NOT NULL AUTO_INCREMENT,
+			  addressLineOne VARCHAR(35) NOT NULL,
+			  addressLineTwo VARCHAR(35) NOT NULL,
+			  county VARCHAR(35) NOT NULL,
+			postCode VARCHAR(15) NOT NULL,
+		contactNumber VARCHAR(35) NOT NULL,
+
+				PRIMARY KEY(ID)
+														)";
+
+if(!$resultt = $database->query($create_table_address)){
+		die('Could not create product table [' . $database->error . ']');
 	$result->close();
 }
 

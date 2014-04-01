@@ -130,26 +130,15 @@ body {
 	border-radius:25px;
 	opacity: 0.99;
 }
-
-#productDeleteShow{
-		display: none;
-		postion: absolute;
-		display: none;
-		font-size: 25px;
-		text-align: center;
-		top: 18%;
-		color: red;
-}
-#productModifyShow{
+.successBasket{
 	display: none;
 	postion: absolute;
 	display: none;
 	font-size: 25px;
 	text-align: center;
 	top: 18%;
-	color: red;
+	color: green;
 }
-
 #changeQuantityInBasketFail{
 	postion: absolute;
 	display: none;
@@ -160,6 +149,11 @@ body {
 }
 .modifyQuantityInLocalStorage{
 	width: 40px;
+}
+.floatLeftAndStyle{
+	padding-left: 20px;
+	font-style: italic;
+	font-weight:bold;
 }
 /* navigation Bar CSS
 ------------------------------------------*/
@@ -200,7 +194,10 @@ nav ul li p {
 	display: block; padding: 10px 15px;
 	color: #757575; text-decoration: none;
 }
-
+.bigButton{
+	width: 100px;
+	height: 100px;
+}
 /* Headers CSS
 ------------------------------------------*/
 

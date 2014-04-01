@@ -1,5 +1,4 @@
 <?php
-	include("../../database/connect_database.php");
 
      function test_input($data)
     {

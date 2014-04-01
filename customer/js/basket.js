@@ -4,6 +4,7 @@ function listAllItems() {
   var target = _('basketTotalOnHover');
   //This clears the basket. Every time they hover over it it starts off empty and not what they saw last time.
   target.innerHTML = "";
+  target.innerHTML = "Basket..."
     for (var a in localStorage) {
         var json_output = JSON.parse(localStorage[a]);
         for (var i = 0; i < json_output.length; i++) {
@@ -20,6 +21,7 @@ function listAllItems() {
                 target.innerHTML += output;
         }
     }
+    target.innerHTML += "<input type='button' id='clearBasket' value='Empty'/><input type='button' id='checkoutBasket' value='Checkout'/>";
     basketOnHoverLoad(productTotalInDB, target);
 }
 /* This function waits and sees when the user hovers over the basket, when they do, a DIV is made visible. When the user hovers away from the basket the div is hidden. This function also allows the user to hover over the div to
@@ -69,6 +71,11 @@ function changesInBasket(productTotalInDB) {
     var getRemoveButton = document.getElementsByClassName("removeProductFromBasket");
     //Gets the button that says 'Modify'
     var getModifyButton = document.getElementsByClassName("modifyQuantity");
+    //Gets the Clear Baskt Button.
+    var getModifyButton = _("clearBasket");
+    //Gets the Checkout Basket Button.
+    var getCheckoutButton = _("checkout");
+
     //Delete Local Storage.
     for (var i = 0, j = getRemoveButton.length; i < j; i++) {
         getRemoveButton[i].addEventListener("click", function (event) {
@@ -86,6 +93,7 @@ function changesInBasket(productTotalInDB) {
             window.setTimeout(vanishText, 1000);
         }, false);
     }
+
     //Modify Local Storage --- BUG HERE ----
     for (var i = 0, j = getModifyButton.length; i < j; i++) {
             getModifyButton[i].addEventListener("click", function (event) {
@@ -120,12 +128,31 @@ function changesInBasket(productTotalInDB) {
             }
         });
     }
+    //Clears Local Storage.
+    if(getModifyButton){
+      getModifyButton.addEventListener("click", function(){
+        localStorage.clear();
+        var basketEmpty = _("basketEmptied").style.display ='block';
+        window.setTimeout(vanishText, 1000);
+      });
+    }
+    if(checkoutBasket){
+      checkoutBasket.addEventListener("click", function(){
+        //Clears the screen of anything not needed.
+        var clearScreen = _("collectInfo");
+        clearScreen.innerHTML = "";
+        var clearTitle = _("disapearOnCheckout").style.display = "none";
+        //This function is found in checkout.js
+        getContent(clearScreen);
+      });
+    }
 }
 function notLoad(){
   var showModify = _("changeQuantityInBasketFail").style.display = 'none';
 }
 //Makes the text that comes up saying 'Product Deleted' display none.
 function vanishText() {
+    var showEmpty  = _("basketEmptied").style.display ="none";
     var showDelete = _("productDeleteShow").style.display = 'none';
     var showDelete = _("productModifyShow").style.display = 'none';
     increaseBasketNumberAfterRemoveorModify();

@@ -3,8 +3,7 @@ function _(el) {
     return document.getElementById(el);
 }
 //------------------------ Home Screen Printout ----------------------
-var pageLoaded;
-pageLoaded = function () {
+function pageLoaded() {
     var xhr, target, changeListener;
     target = _("collectInfo");
     xhr = new XMLHttpRequest();
@@ -35,4 +34,4 @@ function json(jsonObj, target) {
         target.innerHTML += output;
     }
 };
-window.addEventListener("load", pageLoaded);
+window.addEventListener("load", pageLoaded());
