@@ -5,47 +5,42 @@ function _(el){
   return document.getElementById(el);
 }
 
-//AJAX function that POSTS through product information
 function uploadedFile() {
-  //Creates Varaibles.
-  var file, name, description, quantity, category, price, xhr, target;
+	var file, name, description, quantity, category, price, xhr, target;
+	xhr = new XMLHttpRequest();
+	target = _("status");
 
-  xhr = new XMLHttpRequest();
-  //Where the information is going to be injected to.
-  target = _("status");
-  //All the files brought in from the form.
-  file = _("file1").files[0];
-  name = _("name").value;
-  description = _("description").value;
-  quantity = _("quantity").value;
-  category = _("category").value;
-  price = _("price").value
+	file         = _("file1").files[0];
+	name         = _("name").value;
+	description  = _("description").value;
+	quantity     = _("quantity").value;
+	category     = _("category").value;
+	price        = _("price").value
 
-  var formdata = new FormData();
+	var formdata = new FormData();
 
-  formdata.append("file1", file);
-  formdata.append("name", name);
-  formdata.append("quantity", quantity);
-  formdata.append("description", description);
-  formdata.append("category", category);
-  formdata.append("price",price);
+	formdata.append("file1", file);
+	formdata.append("name", name);
+	formdata.append("quantity", quantity);
+	formdata.append("description", description);
+	formdata.append("category", category);
+	formdata.append("price",price);
 
 
-changeListener = function () {
-    if(xhr.readyState == 4 && xhr.status == 200) {
-       json(xhr.responseText, target);
-    }
-  };
+  changeListener = function () {
+  		if(xhr.readyState == 4 && xhr.status == 200) {
+  		   jsonThis(xhr.responseText, target);
+  		}
+  	};
 
-  xhr.open("POST", "SQL/addProductSQL.php", true);
-  //xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  xhr.onreadystatechange = changeListener;
-  xhr.send(formdata);
+	xhr.open("POST", "SQL/addProductSQL.php", true);
+	//xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhr.onreadystatechange = changeListener;
+	xhr.send(formdata);
 
 }
 //Formatting the way that I want my data to be presnted.
-function json(jsonObj, target){
-  console.log(jsonObj);
+function jsonThis(jsonObj, target){
   var json_output = JSON.parse(jsonObj);
   target.innerHTML = "";
   target.innterHTML = "Product Added Successfully.";

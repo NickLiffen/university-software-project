@@ -6,7 +6,7 @@ include("inc/header.php");
 	<section>
 			<fieldset><legend><span>Would you like to add a Product?</span></legend>
 				<!--This prints out the success message for the product being added to the database-->
-				<form method="post" id = "myForm" name="myForm" enctype="multipart/form-data" onsubmit="return false">
+				<form method="post" id = "myForm" enctype="multipart/form-data" name="myForm" onsubmit="return false">
 					<div class='alignLeft'>
 					<br> &nbsp;
 					<p>Please Enter a Product Name:*    					<input type="text" id="name" 		name="name" 		placeholder="Name" 			 /> 			<span id="errorname"></span>  			<span class="error">	<?php echo $nameErr;?>			</span>	</p>

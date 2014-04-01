@@ -2,6 +2,8 @@
 function getContent(clearScreen){
   //Gets the div where everything is going to be put.
   var target = _("checkout");
+  target.style.display ='block';
+  target.innerHTML = " ";
   target.innerHTML = "<h2>Checkout</h2>";
   target.innerHTML += "<h2>Your Items</h2>";
   for (var a in localStorage) {
