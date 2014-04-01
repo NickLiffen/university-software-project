@@ -23,29 +23,79 @@ function getContent(clearScreen){
   var outputNew 	= 	"<fieldset><legend><span>Please Enter your Address?</span></legend>"+
           "<form method='post' id = 'Form' name='Form' onsubmit='return false;'>" +
           "<br />"+
-          "<p>First Line of Address: *<input type='text' id='firstLineAddressValue' placeholder='Enter Here'/></p>"+
-          "<p>Second Line of Address: *<input type='text' id='secondLineAddressValue' placeholder='Enter Here'/></p>"+
-          "<p>County: *<input type='text' id='countyNumber' placeholder='Enter Here'/> </p>"+
-          "<p>PostCode: *<input type='text' id='postCodeValue' placeholder='Enter Here'/> </p>"+
-          "<p>Contact Number: *<input type='text' id='contactNumberValue' placeholder='Enter Here'/> </p>"+
+          "<p>First Line of Address: *<input type='text' name ='firstLineAddressValue' id='firstLineAddressValue' placeholder='Enter Here'/><span id='errorOne'></span></p>"+
+          "<p>Second Line of Address: *<input type='text' name='secondLineAddressValue' id='secondLineAddressValue' placeholder='Enter Here'/></p>"+
+          "<p>County: *<input type='text' id='countyNumber' name='countyNumber' placeholder='Enter Here'/><span id='errorTwo'></span></p>"+
+          "<p>PostCode: *<input type='text' id='postCodeValue' name='postCodeValue' placeholder='Enter Here'/><span id='errorThree'></span></p>"+
+          "<p>Contact Number: *<input type='text' id='contactNumberValue' name='contactNumberValue' placeholder='Enter Here'/><span id='errorFour'></span></p>"+
           "<br />"+
           "</form>"+
           "<div id='statusUpdate'></div>"+
           "</fieldset>";
-          //This outputs the array
+          //This outputs the form above
           target.innerHTML += outputNew;
 
           target.innerHTML += "<p class='floatLeftAndStyle'>Please make sure that all the information is correct and the address you have ordered is correct.</p>"
 
           target.innerHTML += "<div id='finalCheckout'><input type ='button' id='finalCheckout' value='Checkout'/></div>"
           //This runs the AJAX request for POSTING the address information to the database.
-          runAJAX(target, clearScreen);
+          validateAddress(target, clearScreen);
 }
-//This actually runs the ajax request
-function runAJAX(target, clearScreen){
+//Validates the Form that allows the user to enter a product to the database.
+function validateAddress(target, clearScreen) {
   var finalButton = _("finalCheckout");
   if(finalButton){
     finalButton.addEventListener("click",function(){
+  //Sets errors to 0
+  var errors = 0;
+ //Checks the name value of the form is entered.
+  var a=document.forms["Form"]["firstLineAddressValue"].value;
+    if (a==null || a=="")
+      {
+        var errorOne = _('errorOne')
+        errorOne.style.color ='red';
+        errorOne.innerHTML="Please enter an address";
+        errors = errors + 1;
+      }
+  //Checks the description part is entered.
+  var c=document.forms["Form"]["countyNumber"].value;
+    if (c==null || c=="")
+      {
+        var errorTwo = _('errorTwo');
+        errorTwo.style.color='red';
+        errorTwo.innerHTML="Please enter a county";
+        errors = errors + 1;
+      }
+  //Checks to see if a category has been entered.
+  var d=document.forms["Form"]["postCodeValue"].value;
+    if (d==null || d=="")
+      {
+        var errorThree = _('errorThree')
+        errorThree.style.color = "red";
+        errorThree.innerHTML="Please enter a PostCode";
+        errors = errors + 1;
+      }
+  //Checks to see if the price has been entered.
+  var e=document.forms["Form"]["contactNumberValue"].value;
+    if (e==null || e=="")
+      {
+        var errorFour = _('errorFour');
+        errorFour.style.color = "red";
+        errorFour.innerHTML = "Please enter a number";
+        errors = errors + 1;
+      }
+      //If there are any errors are found it returns false but if not it proccedds.
+      if(errors > 0){
+        return false;
+      }
+      else {
+        runAJAX(target, clearScreen);
+      }
+});
+}
+}
+//This actually runs the ajax request
+function runAJAX(target, clearScreen){
 
     //Creates Varaibles.
     var addressLineOne, addressLineTwo, county, postCode, contatNumber, xhr;
@@ -71,9 +121,8 @@ function runAJAX(target, clearScreen){
       xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       xhr.onreadystatechange = changeListener;
       xhr.send(vars);
-    });
   }
-}
+
 //This prints the message saying that the order is being prossed. Ans sets the previous page back to visible.
 function printMessage(JSONobj, target, clearScreen){
   target.style.display = 'none';
