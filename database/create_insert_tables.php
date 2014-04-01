@@ -24,8 +24,9 @@ $create_table_address =
 			  addressLineOne VARCHAR(35) NOT NULL,
 			  addressLineTwo VARCHAR(35) NOT NULL,
 			  county VARCHAR(35) NOT NULL,
-			postCode VARCHAR(15) NOT NULL,
-		contactNumber VARCHAR(35) NOT NULL,
+				postCode VARCHAR(15) NOT NULL,
+				contactNumber VARCHAR(35) NOT NULL,
+				noOfProducts int NOT NULL,
 
 				PRIMARY KEY(ID)
 														)";

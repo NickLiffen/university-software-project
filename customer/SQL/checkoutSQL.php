@@ -14,10 +14,9 @@ include("../../database/connect_database.php");
       $county = test_input($_POST['county']);
       $postCode = test_input($_POST['postCode']);
       $contactNumber = test_input($_POST['contactNumber']);
+      $noOfProducts = test_input($_POST['noOfProducts']);
       //Adds it to the database
-      $query = "INSERT INTO address (addressLineOne, addressLineTwo, county, postCode, contactNumber) VALUES ('$addressOne','$addressTwo','$county','$postCode','$contactNumber')";
-      //Runs the query
-      echo $query;
+      $query = "INSERT INTO address (addressLineOne, addressLineTwo, county, postCode, contactNumber, noOfProducts) VALUES ('$addressOne','$addressTwo','$county','$postCode','$contactNumber','$noOfProducts')";
       $result = $database->query($query) OR die("Failed query $query");
       echo $database->error."<p>";
       echo $result;

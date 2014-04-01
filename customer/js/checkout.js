@@ -100,9 +100,12 @@ function validateAddress(target, clearScreen) {
 function runAJAX(target, clearScreen){
 
     //Creates Varaibles.
-    var addressLineOne, addressLineTwo, county, postCode, contatNumber, xhr;
+    var addressLineOne, addressLineTwo, county, postCode, contatNumber, noOfProducts, xhr;
 
     xhr = new XMLHttpRequest();
+
+    noOfProducts = localStorage.length;
+    console.log(noOfProducts);
 
     //All the files brought in from the form.
     addressLineOne = _("firstLineAddressValue").value;
@@ -111,7 +114,7 @@ function runAJAX(target, clearScreen){
     postCode = _("postCodeValue").value;
     contactNumber = _("contactNumberValue").value
 
-    var vars = "addressLineOne="+addressLineOne+"&addressLineTwo="+addressLineTwo+"&county="+county+"&postCode="+postCode+"&contactNumber="+contactNumber;
+    var vars = "addressLineOne="+addressLineOne+"&addressLineTwo="+addressLineTwo+"&county="+county+"&postCode="+postCode+"&contactNumber="+contactNumber+"&noOfProducts="+noOfProducts;
 
     changeListener = function () {
         if(xhr.readyState == 4 && xhr.status == 200) {
