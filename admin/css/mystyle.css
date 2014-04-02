@@ -1,0 +1,180 @@
+/* Main CSS
+------------------------------------------*/
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+
+  color: black;
+  font-family: sans-serif;
+  font-size: 17px;
+}
+
+.item{
+  width: 31%;
+  margin-right: 2%;
+  float: left;
+  margin-bottom: 70px;
+}
+
+.item p{
+  margin: 0 0 0 0;
+  padding: 0;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.item h3 {
+  text-align: center;
+}
+
+.item img{
+  width: 100%;
+  height: 200px;
+  width: 200px;
+}
+#box {
+  width: 100%;
+  margin: 0 auto;
+  background-color: #eee;
+}
+.floatLeft{
+  padding-left: 20px;
+}
+/* navigation Bar CSS
+------------------------------------------*/
+nav {
+  margin: 10px auto;
+  text-align: center;
+  padding-bottom: 10px;
+  border-bottom: solid;
+  border-width: 1px;
+}
+
+nav ul {
+  background: #fff;
+  box-shadow: 0px 0px 9px rgba(0,0,0,0.15);
+  padding:  0px;
+  border-radius: 10px;
+  list-style: none;
+  position: relative;
+  display: inline-table;
+}
+
+nav ul li:hover {
+
+  font-weight:bold;
+}
+nav ul li:hover a {
+  color: black;
+}
+nav ul li {
+  float: left;
+}
+nav ul li a {
+  display: block; padding: 10px 15px;
+  color: #757575; text-decoration: none;
+}
+
+
+/* Headers CSS
+------------------------------------------*/
+
+h1 {
+  display:block;
+  text-align: left;
+  padding-bottom:15px;
+  padding-top: 15px;
+  font-size: 23px;
+}
+h2 {
+  display:block;
+  text-align: center;
+  padding-bottom: 15px;
+  padding-top: 15px;
+  font-size: 20px;
+}
+h3 {
+  display:block;
+  text-align: left;
+  padding-bottom: 15px;
+  padding-top: 15px;
+  font-size: 20px;
+}
+/* Genreal CSS
+------------------------------------------*/
+section{
+  padding: 1em;
+  padding-right: 2em;
+  color: black;
+}
+p{
+  padding-bottom: 10px;
+}
+footer{
+
+  text-align: center;
+  width: 100%;
+  bottom: 0;
+  background: #ffffff;
+  border-top: solid;
+  border-width: 1px;
+  padding-top: 15px;
+  position: absolute;
+}
+
+fieldset {
+    border-radius: 10px;
+    background: #eee;
+    margin: 20px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,.3);
+    position: relative;
+    border: 2px groove threedface;
+}
+legend {
+    position: absolute;
+    top: -2px;
+    background: #fff;
+    padding: 10px 20px;
+    border: 2px groove threedface;
+    border-top: none;
+    box-shadow: inset 0 -5px 5px rgba(0,0,0,.2);
+    text-shadow: 1px 1px 2px rgba(0,0,0,.3);
+    font-weight: bold;
+}
+legend span {
+    display: block;
+    margin: -20px;
+    background: #fff;
+    padding: 0px 20px;
+}
+
+
+/* Listing
+------------------------------------------*/
+ul
+{
+  padding-bottom: 10px;
+  padding-left: 10px;
+}
+ul>li
+{
+  padding: 5px;
+}
+
+/* CLASSES
+------------------------------------------*/
+/* Header for Overall document
+------------------------------------------*/
+
+section.header h1
+{
+      text-align: center;
+      font-size: 35px;
+      padding-bottom: 1px;
+      padding-top: 1px;
+}
