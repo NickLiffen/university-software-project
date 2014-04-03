@@ -26,7 +26,7 @@
             <ul>
               <li><a href="customer/">Customer View</a></li>
               <li><a href="CMS/">Content Managment System</a></li>
-              <li><a href="admin/">Your Admin Page</a></li>
+              <li><a href="admin/">Admin Page</a></li>
             </ul>
           </nav>
         </div>
