@@ -41,6 +41,7 @@ function uploadedFile() {
 }
 //Formatting the way that I want my data to be presnted.
 function jsonThis(jsonObj, target){
+  console.log(jsonObj);
   var json_output = JSON.parse(jsonObj);
   target.innerHTML = "";
   target.innterHTML = "Product Added Successfully.";

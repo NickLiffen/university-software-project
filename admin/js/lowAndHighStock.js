@@ -38,7 +38,7 @@ function json(jsonObj, target){
   var json_output = JSON.parse(jsonObj);
   //Checks to see if anything has come back from the search. If nothing has. Prints out message.
   if(isEmpty(json_output)){
-    target.innerHTML = "<div class='noResults'><p>You have no stock with less then 5 remaining!<p></div>";
+    target.innerHTML = "<div class='noResults'><p>No stock in this bracket!<p></div>";
   }
   else{
   //Starts the loop

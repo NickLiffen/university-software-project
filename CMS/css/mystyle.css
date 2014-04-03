@@ -278,10 +278,17 @@ ul>li
 /* Header for Overall document
 ------------------------------------------*/
 
-section.header h1
-{
+.header{
 			text-align: center;
 			font-size: 35px;
-			padding-bottom: 1px;
+			padding-bottom: 20px;
 			padding-top: 1px;
+}
+
+.spacing{
+	padding-top: 100px;
+}
+.center{
+	display: inline-block;
+	text-align:left;
 }
