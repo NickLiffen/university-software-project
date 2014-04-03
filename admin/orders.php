@@ -1,16 +1,21 @@
-<?php
-$title = "Open Orders";
-include("inc/header.php");
-?>
+<?php $title="Open Orders" ; include( "inc/header.php"); ?>
+<article>
+    <section class='floatLeft'>
+        <h2>Open Orders</h2>
+        <p>Total amount of open orders:
+            <div id='totalOrders'></div>
+        </p>
+    </section>
 
-<h2>Open Orders</h2>
-<div class='floatLeft'>
+    <section class='floatLeft'>
+        <div id='openOrdersTarget'></div>
+    </section>
 
-<p>Total amount of open orders:<div id='totalOrders'></div></p>
 
-<div id='openOrdersTarget'></div>
 
-</div>
+    <!--Script that runs the search bar.-->
+    <script src="js/openOrders.js"></script>
 
-<!--Script that runs the search bar.-->
-<script src="js/openOrders.js"></script>
+    </body>
+
+    </html>
