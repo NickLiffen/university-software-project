@@ -28,6 +28,11 @@ function searchAJAX(str) {
 }
 
 function pageLoaded(str) {
+  //This is here becuase if they are on the page where they 'search' for products, it sets the sarch features display to nothing. More focus on products.
+  var searchFeatures = _("disapearOnCheckout");
+  if(searchFeatures){
+    searchFeatures.style.display = 'block';
+  }
     var price = _("price");
     var fetchbutton = _("searchBox");
     var priceButton = _("priceButton");

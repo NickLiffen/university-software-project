@@ -23,8 +23,8 @@
     <section>
         <!--This is where the products get loaded into the page. In this DIV.-->
         <div id="collectInfo"></div>
-        <!--This is the class the hides/shows the modal.-->
-        <div class="modal modal--hidden"></div>
+        <!--This is the div that focuses in on a product when its clicked-->
+        <div id="focusProduct"></div>
         <!--This is where the content for checking out will be.-->
         <div id="checkout"></div>
     </section>
@@ -35,7 +35,7 @@
 <!--This is what you first see on the screen. Collects the most recent products in the database.-->
 <script src="js/listProducts.js"></script>
 <!--Loads the Modal when you click on a specific product.-->
-<script src="js/modal.js"></script>
+<script src="js/focusProduct.js"></script>
 <!--Stores products in Local Storage.-->
 <script src="js/localStorage.js"></script>
 <!--Lets you access the basket, remove and modify products in the basket-->

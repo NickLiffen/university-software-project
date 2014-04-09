@@ -8,25 +8,25 @@ function listAllItems() {
     for (var a in localStorage) {
         var json_output = JSON.parse(localStorage[a]);
         for (var i = 0; i < json_output.length; i++) {
-            var productTotalInDB = +json_output[i].quantity;
             var output =
                 "<div id='item" + json_output[i].id + "'>" +
                 "<h3><span class='bold'>Product Name:</span> " + json_output[i].name + '</h3>' +
                 "<p><span class='bold'>Product Price: £</span>" + json_output[i].price + '</p>' +
                 "<p><span class='bold'>Quantity In Basket:</span> <input type='number' class='modifyQuantityInLocalStorage' value ='" + json_output[i].BasketTotal + "'</p>" +
                 "<p><span class='bold'>Total Cost: £</span>" + (json_output[i].price * json_output[i].BasketTotal) + '</p>' +
-                "<p><span class='centre'><input type='button' class='removeProductFromBasket' value='Remove'/><input type='button' class='modifyQuantity' value='Modify'/></span></p>" +
+                "<span class='centre'><input type='button' class='modifyProductFromBasket' value='Modify'/></span>" +
+                "<span class='centre'><input type='button' class='removeProductFromBasket' value='Remove'/></span>" +
                 "</div>";
 
                 target.innerHTML += output;
         }
     }
     target.innerHTML += "<input type='button' id='clearBasket' value='Empty'/><input type='button' id='checkoutBasket' value='Checkout'/>";
-    basketOnHoverLoad(productTotalInDB, target);
+    basketOnHoverLoad(target);
 }
 /* This function waits and sees when the user hovers over the basket, when they do, a DIV is made visible. When the user hovers away from the basket the div is hidden. This function also allows the user to hover over the div to
 amend there product information.*/
-function basketOnHoverLoad(productTotalInDB, target) {
+function basketOnHoverLoad(target) {
     var getBasket = document.getElementsByClassName("basketSurrounding");
     //When the user hovers over the basket and div showing prodict information
     for (var i = 0, j = getBasket.length; i < j; i++) {
@@ -60,23 +60,61 @@ function basketOnHoverLoad(productTotalInDB, target) {
             test.style.display = 'none';
         });
     }
-    changesInBasket(productTotalInDB);
+    changesInBasket();
 }
-/*This function removes a product once the user has clicked on the 'remove button' and also modifies
-the amount of a certain product they have got in the basket. I tried to use getElementByID but that
-didn't work. When i do the classes it workes for delete but not for modify. It isn't getting the
-correct values for old and new quantity. */
-function changesInBasket(productTotalInDB) {
-    //Gets the button that says 'Remove'
-    var getRemoveButton = document.getElementsByClassName("removeProductFromBasket");
-    //Gets the button that says 'Modify'
-    var getModifyButton = document.getElementsByClassName("modifyQuantity");
-    //Gets the Clear Baskt Button.
-    var getModifyButton = _("clearBasket");
-    //Gets the Checkout Basket Button.
-    var getCheckoutButton = _("checkout");
+//This function initiates the four functions that you are able to do in the basket
+function changesInBasket() {
+  modifyProduct();
+  removeProduct();
+  emptyBasket();
+  checkout();
+}
+//Updates the product total in basket
+function modifyProduct(){
+var getModifyButton = document.getElementsByClassName("modifyProductFromBasket");
+  for (var i = 0, j = getModifyButton.length; i < j; i++) {
+      getModifyButton[i].addEventListener("click", function (event) {
 
-    //Delete Local Storage.
+          //Bubbles up and finds the ID - WORKS
+          var e = event.target;
+          while (e.id.indexOf('item') == -1) {
+              e = e.parentNode;
+          }
+          var product_id = e.id;
+
+          //Gets the maximum product quantity - WORKS
+          var product = localStorage.getItem(product_id) ;
+          var asObject = JSON.parse(product);
+          var totalinDB = +asObject[0].quantity;
+
+          //THIS DOESN'T WORK
+          var newQuantity = document.getElementsByClassName("modifyQuantityInLocalStorage");
+          for (var i = 0, j = getModifyButton.length; i < j; i++) {
+              var newValue = newQuantity[i].value;
+            }
+
+          //Testing Purposes
+          console.log("Product ID: " + product_id);
+          console.log("Amount in DB: " + totalinDB);
+          console.log("Amount in Basket: " + newValue);
+
+        //Checks to see if there is enough in stock, if not then it fails.
+        if (newValue > totalinDB) {
+            var textHere = _("changeQuantityInBasketFail");
+            textHere.innerHTML = "<h1>Not enough in Stock - Maxium:" + totalinDB + "</h1>";
+            textHere.style.display = 'block';
+            window.setTimeout(notLoad, 4000);
+        } else {
+            basketAjax(product_id, newValue)
+            var showModify = _("productModifyShow").style.display = 'block';
+            window.setTimeout(vanishText, 1000);
+        }
+    });
+  }
+}
+//Removes Product from Local Storage & Basket
+function removeProduct(){
+  var getRemoveButton = document.getElementsByClassName("removeProductFromBasket");
     for (var i = 0, j = getRemoveButton.length; i < j; i++) {
         getRemoveButton[i].addEventListener("click", function (event) {
             //Bubbles up and finds the ID, then deletes it.
@@ -91,44 +129,12 @@ function changesInBasket(productTotalInDB) {
             var showDelete = _("productDeleteShow").style.display = 'block';
             //This sets the timeout that makes the message disapear after 3 seconds.
             window.setTimeout(vanishText, 1000);
-        }, false);
-    }
-
-    //Modify Local Storage --- BUG HERE ----
-    for (var i = 0, j = getModifyButton.length; i < j; i++) {
-            getModifyButton[i].addEventListener("click", function (event) {
-              //Bubbles up and finds the ID of the product they want to modify
-              var e = event.target;
-              while (e.id.indexOf('item') == -1) {
-                  e = e.parentNode;
-              }
-              var product_id = e.id;
-
-              //Loops through to collect the value of the new quantity. THINK THIS IS WRONG
-              var newQuantity = document.getElementsByClassName("modifyQuantityInLocalStorage");
-                for(var i = 0, j = newQuantity.length; i < j; i++){
-                  var newValue = newQuantity[i].value;
-                  console.log(newValue);
-                }
-
-            var totalinDB = productTotalInDB;
-            console.log("Product ID: " + product_id);
-            console.log("Amount in DB: " + totalinDB);
-            console.log("Amount in Basket: " + newValue);
-            //Checks to see if there is enough in stock, if not then it fails.
-            if (newValue > totalinDB) {
-                var textHere = _("changeQuantityInBasketFail");
-                textHere.innerHTML = "<h1>Not enough in Stock - Maxium:" + totalinDB + "</h1>";
-                textHere.style.display = 'block';
-                window.setTimeout(notLoad, 4000);
-            } else {
-                basketAjax(product_id, newValue)
-                var showModify = _("productModifyShow").style.display = 'block';
-                window.setTimeout(vanishText, 1000);
-            }
         });
     }
-    //Clears Local Storage.
+}
+//Empty Basket
+function emptyBasket(){
+  var getModifyButton = _("clearBasket");
     if(getModifyButton){
       getModifyButton.addEventListener("click", function(){
         localStorage.clear();
@@ -136,6 +142,10 @@ function changesInBasket(productTotalInDB) {
         window.setTimeout(vanishText, 1000);
       });
     }
+}
+//Checkout
+function checkout(){
+  var getCheckoutButton = _("checkout");
     if(checkoutBasket){
       checkoutBasket.addEventListener("click", function(){
         //Clears the screen of anything not needed.
