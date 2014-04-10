@@ -1,72 +1,29 @@
-var pageLoaded, validateForm, changeListener;
-
-//This is the first AJAX Request and it simple sends through the form information and stores that information in the database.
+var pageLoaded, validateForm;
+//Sends through my product information.
 function uploadedProduct() {
-    var file, name, description, quantity, category, price, xhr, target;
-    xhr = new XMLHttpRequest();
+    var file, name, description, quantity, category, price, target, vars;
+    //Collectting varibles. All using my _ function that collects ID's.
+    file = _("file1").files[0];
     target = _("status");
-
     name = _("name").value;
     description = _("description").value;
     quantity = _("quantity").value;
     category = _("category").value;
     price = _("price").value
-
+    //FormData is a safe and easy method of posting data.
     var formdata = new FormData();
-
+    formdata.append("file1", file);
     formdata.append("name", name);
     formdata.append("quantity", quantity);
     formdata.append("description", description);
     formdata.append("category", category);
     formdata.append("price", price);
-
-
-    changeListener = function () {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            addImageShowProduct(xhr.responseText, target, name, description, quantity, category, price);
-        }
-    };
-
-    xhr.open("POST", "SQL/addProductSQL.php", true);
-    //xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhr.onreadystatechange = changeListener;
-    xhr.send(formdata);
-
+    //Calling the AJAX Post function that I have already created
+    ajaxPost("SQL/addProductSQL.php", formdata, jsonThis, target, null);
 }
-/*This is the second AJAAX function and this stores the image as a flat file but also brings back the object that the user has just added.
-The reason why there is two different functions is becuase when it was in one it only worked 50% of the time. It would add but not add the
-image or bring back the object. Now its in 2 seperate functions it works all the time (hopefully)*/
-function addImageShowProduct(jsonObject, target, name, description, quantity, category, price){
-  var file, xhr
-  xhr = new XMLHttpRequest();
 
-  file = _("file1").files[0];
-
-  var formdata = new FormData();
-
-  formdata.append("file1", file);
-  formdata.append("name", name);
-  formdata.append("quantity", quantity);
-  formdata.append("description", description);
-  formdata.append("category", category);
-  formdata.append("price", price);
-
-
-  changeListener = function () {
-      if (xhr.readyState == 4 && xhr.status == 200) {
-          jsonThis(xhr.responseText, target);
-      }
-  };
-
-  xhr.open("POST", "SQL/addProductImageSQL.php", true);
-  //xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  xhr.onreadystatechange = changeListener;
-  xhr.send(formdata);
-
-}
 //Formatting the way that I want my data to be presnted.
 function jsonThis(jsonObj, target) {
-    console.log(jsonObj);
     var json_output = JSON.parse(jsonObj);
     target.innerHTML = "";
     target.innterHTML = "Product Added Successfully.";

@@ -25,7 +25,7 @@ function getContent(clearScreen) {
     target.innerHTML += "<h2>Please Enter Your Address:</h2>";
     //This outputs the form that allows the user to enter there address.
     var outputNew = "<fieldset><legend><span>Please Enter your Address?</span></legend>" +
-        "<form method='post' id = 'Form' name='Form' onsubmit='return false;'>" +
+        "<form method='post' id='Form' enctype='multipart/form-data' name='Form' onsubmit='return false;'>" +
         "<br />" +
         "<p>First Line of Address: *<input type='text' name ='firstLineAddressValue' id='firstLineAddressValue' placeholder='Enter Here'/><span id='errorOne'></span></p>" +
         "<p>Second Line of Address: *<input type='text' name='secondLineAddressValue' id='secondLineAddressValue' placeholder='Enter Here'/></p>" +
@@ -95,34 +95,25 @@ function validateAddress(target, clearScreen) {
 }
 //This actually runs the ajax request
 function runAJAX(target, clearScreen) {
-
     //Creates Varaibles.
-    var addressLineOne, addressLineTwo, county, postCode, contatNumber, noOfProducts, xhr;
-
-    xhr = new XMLHttpRequest();
-
-    noOfProducts = localStorage.length;
-    console.log(noOfProducts);
-
+    var addressLineOne, addressLineTwo, county, postCode, contatNumber, noOfProducts;
     //All the files brought in from the form.
     addressLineOne = _("firstLineAddressValue").value;
     addressLineTwo = _("secondLineAddressValue").value;
     county = _("countyNumber").value;
     postCode = _("postCodeValue").value;
     contactNumber = _("contactNumberValue").value
-
-    var vars = "addressLineOne=" + addressLineOne + "&addressLineTwo=" + addressLineTwo + "&county=" + county + "&postCode=" + postCode + "&contactNumber=" + contactNumber + "&noOfProducts=" + noOfProducts;
-
-    changeListener = function () {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            printMessage(xhr.responseText, target, clearScreen);
-        }
-    };
-
-    xhr.open("POST", "SQL/checkoutSQL.php", true);
-    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhr.onreadystatechange = changeListener;
-    xhr.send(vars);
+    noOfProducts = localStorage.length;
+    //FormData is a safe and easy method of posting data.
+    var formdata = new FormData();
+    formdata.append("addressLineOne", addressLineOne);
+    formdata.append("addressLineTwo", addressLineTwo);
+    formdata.append("county", county);
+    formdata.append("postCode", postCode);
+    formdata.append("contactNumber", contactNumber);
+    formdata.append("noOfProducts", noOfProducts);
+    //Calling the AJAX Post function that I have already created
+    ajaxPost("SQL/checkoutSQL.php", formdata, printMessage, target, clearScreen);
 }
 
 //This prints the message saying that the order is being prossed. Ans sets the previous page back to visible.

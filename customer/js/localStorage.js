@@ -42,7 +42,7 @@ function basketButtonLoad(product_id, productTotalInDB, focusTarget) {
 }
 //Ajax Request that fires off to find product information to store in local storage.
 function basketAjax(product_id, productQuantity, focusTarget) {
-    ajaxGet("SQL/collectProductsBasketSQL.php?data=" + product_id + "&productNo=" + productQuantity, storeItemInLocalStorage, focusTarget);
+    ajaxGet("SQL/collectProductsBasketSQL.php?data=" + product_id + "&productNo=" + productQuantity, storeItemInLocalStorage, focusTarget, null);
 
 }
 //Stores the JSON object in Local Storage

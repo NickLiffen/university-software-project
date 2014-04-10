@@ -1,18 +1,8 @@
 //Function that counts the number of open orders
 function countOpenOrders() {
-    var xhr, target, changeListener;
+    var target;
     target = _("totalOrders");
-    xhr = new XMLHttpRequest();
-
-    changeListener = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            checkInput(xhr.responseText, target);
-        }
-    };
-
-    xhr.open("GET", "SQL/countOpenOrdersSQL.php", true);
-    xhr.onreadystatechange = changeListener;
-    xhr.send();
+    ajaxGet("SQL/countOpenOrdersSQL.php", checkInput, target, null);
 }
 //Function that checks the number and tells the webiste what to do with it
 function checkInput(jsonObj, target) {
@@ -27,21 +17,10 @@ function checkInput(jsonObj, target) {
 }
 //If number is greater then 0 it collects them products
 function collectOpenOrders(newTarget) {
-    var xhr, target, changeListener;
-    xhr = new XMLHttpRequest();
-
-    changeListener = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            json(xhr.responseText, newTarget);
-        }
-    };
-
-    xhr.open("GET", "SQL/openOrdersSQL.php", true);
-    xhr.onreadystatechange = changeListener;
-    xhr.send();
+    ajaxGet("SQL/openOrdersSQL.php", jsonOutputOpenOrders, newTarget, null);
 }
 //Outputs it the way I want it.
-function json(jsonObj, newTarget) {
+function jsonOutputOpenOrders(jsonObj, newTarget) {
     newTarget.innerHTML = "";
     var json_output = JSON.parse(jsonObj);
 

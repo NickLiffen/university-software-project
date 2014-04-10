@@ -32,16 +32,9 @@ function validateNumber(str) {
 }
 //Runs a search on the users input.
 function searchBar(str) {
-    var xhr = new XMLHttpRequest();
-    var target = document.getElementById("searchStockTarget");
-    changeListener = function () {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            searchResults(xhr.responseText, target, str);
-        }
-    };
-    xhr.open("GET", "SQL/searchDatabaseSQL.php?str=" + str, true);
-    xhr.onreadystatechange = changeListener;
-    xhr.send();
+    var target;
+    target = document.getElementById("searchStockTarget");
+    ajaxGet("SQL/searchDatabaseSQL.php?str=" + str, searchResults, target, str);
 }
 //Outputs the items the way I want it.
 function searchResults(jsonObj, target, str) {
@@ -71,7 +64,6 @@ function searchResults(jsonObj, target, str) {
 //Sets the load listeners
 function setListeners() {
     lowStock();
-    highStock();
 }
 
 window.addEventListener("load", setListeners());

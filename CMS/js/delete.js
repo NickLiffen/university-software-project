@@ -1,6 +1,6 @@
 //AJAX function that sends though the DELETED ID.
 function ajaxDelete(productID, str) {
-    ajaxGet("SQL/deleteProductSQL.php?id=" + productID, deleteMessage, str);
+    ajaxGet("SQL/deleteProductSQL.php?id=" + productID, deleteMessage, str, null);
 }
 //Makes the message visible for 1 second.
 function deleteMessage(object, str) {

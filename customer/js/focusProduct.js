@@ -16,7 +16,7 @@ function setListeners() {
 }
 //Sends off the AJAX Request to look for product clicked on in database.
 function focusAjax(data) {
-    ajaxGet("SQL/collectProductsModalSQL.php?data=" + data, jsonFocus, null);
+    ajaxGet("SQL/collectProductsModalSQL.php?data=" + data, jsonFocus, null, null);
 };
 //Formatting the way it is outputting - PARSE the JSON Object
 function jsonFocus(jsonObj) {

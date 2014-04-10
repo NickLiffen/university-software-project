@@ -2,7 +2,7 @@
 function pageLoaded() {
     target = _("collectInfo");
     target.innerHTML = "";
-    ajaxGet("SQL/collectProductsSQL.php", json, target);
+    ajaxGet("SQL/collectProductsSQL.php", json, target, null);
 };
 //Parses the JSON Object created and formats it to the way I like
 function json(jsonObj, target) {

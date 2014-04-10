@@ -1,21 +1,14 @@
 
 //AJAX function that sends the ONKEYUP letters.
 function searchAJAX(str) {
+  var target;
     if (str.length == 0) {
         document.getElementById("collectInfo").innerHTML = "";
         document.getElementById("collectInfo").style.border = "0px";
         return;
     }
-    var xhr = new XMLHttpRequest();
-    var target = document.getElementById("collectInfo");
-    changeListener = function () {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            json(xhr.responseText, target, str);
-        }
-    };
-    xhr.open("GET", "SQL/searchDatabaseSQL.php?str=" + str, true);
-    xhr.onreadystatechange = changeListener;
-    xhr.send();
+    target = _("collectInfo");
+    ajaxGet("SQL/searchDatabaseSQL.php?str=" + str, json, target, str);
 }
 //This function sends through the letters to the AJAC function.
 function pageLoaded(str) {

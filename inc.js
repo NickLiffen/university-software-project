@@ -14,24 +14,26 @@ function isNumber(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
 }
 //Callback for the GET AJAX call
-function ajaxGet(url,callback, target) {
+function ajaxGet(url,callback,target,extra) {
+  var xhr;
   xhr = new XMLHttpRequest();
   xhr.onload = function() {
-    callback(xhr.responseText, target);
+    callback(xhr.responseText, target, extra);
   }
   xhr.open("GET", url, true);
   xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
   xhr.send();
 }
 //Callback for the POST AJAX call
-function ajaxPost(url,data,callback, target) {
+function ajaxPost(url,vars,callback,target, extra) {
+  var xhr;
   xhr = new XMLHttpRequest();
   xhr.onload = function() {
-    callback(xhr.responseText, target);
+    callback(xhr.responseText, target, extra);
   }
   xhr.open("POST", url, true);
-  xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-  xhr.send('data=' + data);
+  //xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+  xhr.send(vars);
 }
 //Returns true or false to see if an object is empty.
 function isEmpty(obj) {

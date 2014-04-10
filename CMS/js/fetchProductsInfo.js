@@ -4,7 +4,7 @@ var totalProducts, totalStock, mostStock, leastStock, noStock;
 totalProducts = function () {
     var targetOne;
     targetOne = _("totalProdctsNew");
-    ajaxGet("SQL/totalProductsSQL.php", totalProductsOutput, targetOne);
+    ajaxGet("SQL/totalProductsSQL.php", totalProductsOutput, targetOne, null);
 };
 function totalProductsOutput(jsonObjOne, targetOne){
         var json_output = JSON.parse(jsonObjOne);
@@ -23,7 +23,7 @@ function totalProductsOutput(jsonObjOne, targetOne){
 function totalStock() {
     var targetTwo;
     targetTwo = _("totalStockNew");
-    ajaxGet("SQL/totalStockSQL.php", totalStockOutput, targetTwo);
+    ajaxGet("SQL/totalStockSQL.php", totalStockOutput, targetTwo, null);
 };
 function totalStockOutput(jsonObjTwo, targetTwo){
         var json_output = JSON.parse(jsonObjTwo);
@@ -42,7 +42,7 @@ function totalStockOutput(jsonObjTwo, targetTwo){
 function mostStock() {
     var targetThree;
     targetThree = _("maxStockNew");
-    ajaxGet("SQL/maxStockSQL.php", mostStockOutput, targetThree);
+    ajaxGet("SQL/maxStockSQL.php", mostStockOutput, targetThree, null);
 };
 function mostStockOutput(jsonObjThree, targetThree){
         var json_output = JSON.parse(jsonObjThree);
@@ -60,7 +60,7 @@ function mostStockOutput(jsonObjThree, targetThree){
 function leastStock() {
     var targetFour
     targetFour = _("minStockNew");
-    ajaxGet("SQL/minStock.php", leastStockOutput, targetFour);
+    ajaxGet("SQL/minStock.php", leastStockOutput, targetFour, null);
 };
 function leastStockOutput(jsonObjFour, targetFour){
       var json_output = JSON.parse(jsonObjFour);
@@ -79,7 +79,7 @@ function leastStockOutput(jsonObjFour, targetFour){
 function noStock() {
     var targetFive
     targetFive = _("noStock");
-    ajaxGet("SQL/noStockSQL.php", outputItems, targetFive);
+    ajaxGet("SQL/noStockSQL.php", outputItems, targetFive, null);
 };
 function outputItems(jsonObjFive, targetFive) {
   var json_output = JSON.parse(jsonObjFive);
