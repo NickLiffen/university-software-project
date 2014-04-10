@@ -42,18 +42,8 @@ function basketButtonLoad(product_id, productTotalInDB, focusTarget) {
 }
 //Ajax Request that fires off to find product information to store in local storage.
 function basketAjax(product_id, productQuantity, focusTarget) {
-    var xhr, changeListener;
-    var data = product_id;
-    var productNo = productQuantity;
-    xhr = new XMLHttpRequest();
-    changeListener = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            storeItemInLocalStorage(xhr.responseText, focusTarget);
-        }
-    };
-    xhr.open("GET", "SQL/collectProductsBasketSQL.php?data=" + data + "&productNo=" + productNo, true);
-    xhr.onreadystatechange = changeListener;
-    xhr.send();
+    ajaxGet("SQL/collectProductsBasketSQL.php?data=" + product_id + "&productNo=" + productQuantity, storeItemInLocalStorage, focusTarget);
+
 }
 //Stores the JSON object in Local Storage
 function storeItemInLocalStorage(jsonObj, focusTarget) {

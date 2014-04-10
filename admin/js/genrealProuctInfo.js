@@ -1,8 +1,4 @@
-//Function that meand I don't have to type getElementById all the time!!
-function _(el) {
-    return document.getElementById(el);
-}
-
+//Function that collects the total number of products which are selling
 function totalProducts() {
     var xhr, target, changeListener;
     target = _("totalProducts");
@@ -18,7 +14,7 @@ function totalProducts() {
     xhr.onreadystatechange = changeListener;
     xhr.send();
 }
-
+//Function that collects the total number of products which have sold.
 function totalSold() {
     var xhr, target, changeListener;
     target = _("totalSoldProducts");
@@ -34,7 +30,7 @@ function totalSold() {
     xhr.onreadystatechange = changeListener;
     xhr.send();
 }
-
+//Counts the total number of open orders.
 function countOpenOrders() {
     var xhr, target, changeListener;
     target = _("countOpenOrders");
@@ -47,22 +43,6 @@ function countOpenOrders() {
     };
 
     xhr.open("GET", "SQL/countOpenOrdersSQL.php", true);
-    xhr.onreadystatechange = changeListener;
-    xhr.send();
-}
-
-function mostStockProduct() {
-    var xhr, target, changeListener;
-    target = _("mostStock");
-    xhr = new XMLHttpRequest();
-
-    changeListener = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            target.innerHTML = xhr.responseText;
-        }
-    };
-
-    xhr.open("GET", "../CMS/SQL/maxStockSQL.php", true);
     xhr.onreadystatechange = changeListener;
     xhr.send();
 }
@@ -103,7 +83,6 @@ function setLoadListeners() {
     totalProducts();
     totalSold();
     countOpenOrders();
-    mostStockProduct();
     lowStockRemaining();
     noStockRemaining();
 }

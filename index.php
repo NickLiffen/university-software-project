@@ -32,5 +32,6 @@
         </div>
         </section>
     </article>
+    <script src='new.js'></script>
   </body>
 </html>

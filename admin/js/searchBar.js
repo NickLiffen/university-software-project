@@ -9,7 +9,6 @@ function pageLoaded(str) {
 function validateNumber(str) {
     //Checks to see if it a number and the users input is greater then 0
     if (str.length > 0 && isNumber(str)) {
-        console.log("Is a number and greater then 0   " + str)
         _("searchStockTarget").style.display = 'block';
         _("hide").style.display = 'none';
         _("searchBarValidate").innerHTML = '';
@@ -17,14 +16,12 @@ function validateNumber(str) {
     }
     //Checks to see if the unders input is equeals to 0. This is needed otherwise the 'Must be a number would print' when it was emoty
     else if (str.length == 0) {
-        console.log("Is not a number and less then 0   " + str)
         _("hide").style.display = 'block';
         _("searchStockTarget").style.display = 'none';
         _("searchBarValidate").innerHTML = '';
     }
     //If it is not a number is prints this message
     else {
-        console.log("Is not a number and less then 0   " + str)
         _("hide").style.display = 'block';
         _("searchStockTarget").style.display = 'none';
         var error = _("searchBarValidate");
@@ -32,10 +29,6 @@ function validateNumber(str) {
         error.innerHTML = 'Must be a number';
         return false;
     }
-}
-//Really cool function that tests that it is a number.
-function isNumber(n) {
-    return !isNaN(parseFloat(n)) && isFinite(n);
 }
 //Runs a search on the users input.
 function searchBar(str) {
@@ -75,7 +68,7 @@ function searchResults(jsonObj, target, str) {
         }
     }
 }
-
+//Sets the load listeners
 function setListeners() {
     lowStock();
     highStock();

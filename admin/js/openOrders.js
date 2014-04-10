@@ -1,8 +1,3 @@
-
-//Function that meand I don't have to type getElementById all the time!!
-function _(el) {
-    return document.getElementById(el);
-}
 //Function that counts the number of open orders
 function countOpenOrders() {
     var xhr, target, changeListener;

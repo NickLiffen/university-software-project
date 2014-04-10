@@ -1,21 +1,8 @@
-//Function that meand I don't have to type getElementById all the time!!
-function _(el) {
-    return document.getElementById(el);
-}
 //------------------------ Home Screen Printout ----------------------
 function pageLoaded() {
-    var xhr, target, changeListener;
     target = _("collectInfo");
-    xhr = new XMLHttpRequest();
-    changeListener = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            json(xhr.responseText, target);
-        }
-    };
-    xhr.open("GET", "SQL/collectProductsSQL.php", true);
-    xhr.onreadystatechange = changeListener;
-    xhr.send();
-
+    target.innerHTML = "";
+    ajaxGet("SQL/collectProductsSQL.php", json, target);
 };
 //Parses the JSON Object created and formats it to the way I like
 function json(jsonObj, target) {
@@ -30,7 +17,6 @@ function json(jsonObj, target) {
             "<p> Product Category: " + json_output[i].category + '</p>' +
             "<p> Product Price: £" + json_output[i].price + '</p>' +
             "</div>";
-        //This outputs the array
         target.innerHTML += output;
     }
 };

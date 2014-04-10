@@ -1,4 +1,4 @@
-//------------------------ MODAL ----------------------
+//------------------------ Focus ----------------------
 /*This sets the liseteners for the modal - it checks the positioning of the modal
 and then bubles up to the id of the modal- this means the user can click anywhwere
 on the product and not one small space */
@@ -16,18 +16,7 @@ function setListeners() {
 }
 //Sends off the AJAX Request to look for product clicked on in database.
 function focusAjax(data) {
-    //Creates AJAX request
-    var xhr, changeListener;
-    var data = data;
-    xhr = new XMLHttpRequest();
-    changeListener = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            jsonFocus(xhr.responseText);
-        }
-    };
-    xhr.open("GET", "SQL/collectProductsModalSQL.php?data=" + data, true);
-    xhr.onreadystatechange = changeListener;
-    xhr.send();
+    ajaxGet("SQL/collectProductsModalSQL.php?data=" + data, jsonFocus, null);
 };
 //Formatting the way it is outputting - PARSE the JSON Object
 function jsonFocus(jsonObj) {

@@ -1,18 +1,6 @@
 //AJAX function that sends though the DELETED ID.
 function ajaxDelete(productID, str) {
-    var xhr, id
-        xhr = new XMLHttpRequest();
-    id = productID;
-
-    changeListener = function () {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            deleteMessage(xhr.responseText, str);
-        }
-    };
-
-    xhr.open("GET", "SQL/deleteProductSQL.php?id=" + id, true);
-    xhr.onreadystatechange = changeListener;
-    xhr.send();
+    ajaxGet("SQL/deleteProductSQL.php?id=" + productID, deleteMessage, str);
 }
 //Makes the message visible for 1 second.
 function deleteMessage(object, str) {

@@ -1,7 +1,4 @@
-//Function that meand I don't have to type getElementById all the time!!
-function _(el) {
-    return document.getElementById(el);
-}
+
 //AJAX function that sends the ONKEYUP letters.
 function searchAJAX(str) {
     if (str.length == 0) {
@@ -56,22 +53,7 @@ function json(jsonObj, target, str) {
         }
     }
 }
-//Checks to see if JSON Object is Empty
-function isEmpty(obj) {
-    // null and undefined are "empty"
-    if (obj == null) return true;
-    // Assume if it has a length property with a non-zero value
-    // that that property is correct.
-    if (obj.length > 0) return false;
-    if (obj.length === 0) return true;
-    // Otherwise, does it have any properties of its own?
-    // Note that this doesn't handle
-    // toString and valueOf enumeration bugs in IE < 9
-    for (var key in obj) {
-        if (hasOwnProperty.call(obj, key)) return false;
-    }
-    return true;
-}
+
 //This function collects the buttons for Deleting and Modiying a product.
 function getButtons(str, target) {
     //Gets the button that says 'Remove'

@@ -6,7 +6,7 @@
         <div id="searchbox">
             <form method="GET" name="seachForm">
                 <p>Search Box:
-                    <input type="search" id="searchBox" placeholder="Search for Products" onkeyup="pageLoaded(this.value)" class="mytext">
+                    <input type="search" id="searchBox" placeholder="Search for Products" onkeyup="pageLoaded(this.value)" class="mytext" autofocus/>
                 </p>
                 <form>
         </div>

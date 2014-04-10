@@ -93,11 +93,6 @@ var getModifyButton = document.getElementsByClassName("modifyProductFromBasket")
               var newValue = newQuantity[i].value;
             }
 
-          //Testing Purposes
-          console.log("Product ID: " + product_id);
-          console.log("Amount in DB: " + totalinDB);
-          console.log("Amount in Basket: " + newValue);
-
         //Checks to see if there is enough in stock, if not then it fails.
         if (newValue > totalinDB) {
             var textHere = _("changeQuantityInBasketFail");

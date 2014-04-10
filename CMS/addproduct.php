@@ -8,7 +8,7 @@
             <form method="post" id="myForm" enctype="multipart/form-data" name="myForm" onsubmit="return false">
                 <br>&nbsp;
                 <p>Please Enter a Product Name:*
-                    <input type="text" id="name" name="name" placeholder="Name" />	<span id="errorname"></span> 	<span class="error">	<?php echo $nameErr;?>			</span>
+                    <input type="text" id="name" name="name" placeholder="Name" autofocus/>	<span id="errorname"></span> 	<span class="error">	<?php echo $nameErr;?>			</span>
                 </p>
                 <p>Please enter the quantity of the product you have:*
                     <input type="number" id="quantity" name="quantity" placeholder="Quantity" />	<span id="errorquantity"></span> 	<span class="error"> 	<?php echo $quantityErr;?>		</span>
@@ -29,10 +29,8 @@
                     <input name="submit" id="submit" type="button" value="Add Product" />
                     <!--This is where the success message gets printed out when they have added the product.-->
                     <div id='productAddedSuccessfully'></div>
-                    <div class='alignRight'>
                         <!--This prints out the product which they have just added.-->
                         <div id="status"></div>
-                    </div>
             </form>
         </fieldset>
     </section>

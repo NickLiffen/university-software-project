@@ -1,16 +1,11 @@
 var pageLoaded, validateForm, changeListener;
 
-//Quick function that saves me writing document.getElementByID all the time.
-function _(el) {
-    return document.getElementById(el);
-}
-
-function uploadedFile() {
+//This is the first AJAX Request and it simple sends through the form information and stores that information in the database.
+function uploadedProduct() {
     var file, name, description, quantity, category, price, xhr, target;
     xhr = new XMLHttpRequest();
     target = _("status");
 
-    file = _("file1").files[0];
     name = _("name").value;
     description = _("description").value;
     quantity = _("quantity").value;
@@ -19,7 +14,6 @@ function uploadedFile() {
 
     var formdata = new FormData();
 
-    formdata.append("file1", file);
     formdata.append("name", name);
     formdata.append("quantity", quantity);
     formdata.append("description", description);
@@ -29,7 +23,7 @@ function uploadedFile() {
 
     changeListener = function () {
         if (xhr.readyState == 4 && xhr.status == 200) {
-            jsonThis(xhr.responseText, target);
+            addImageShowProduct(xhr.responseText, target, name, description, quantity, category, price);
         }
     };
 
@@ -37,6 +31,37 @@ function uploadedFile() {
     //xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.onreadystatechange = changeListener;
     xhr.send(formdata);
+
+}
+/*This is the second AJAAX function and this stores the image as a flat file but also brings back the object that the user has just added.
+The reason why there is two different functions is becuase when it was in one it only worked 50% of the time. It would add but not add the
+image or bring back the object. Now its in 2 seperate functions it works all the time (hopefully)*/
+function addImageShowProduct(jsonObject, target, name, description, quantity, category, price){
+  var file, xhr
+  xhr = new XMLHttpRequest();
+
+  file = _("file1").files[0];
+
+  var formdata = new FormData();
+
+  formdata.append("file1", file);
+  formdata.append("name", name);
+  formdata.append("quantity", quantity);
+  formdata.append("description", description);
+  formdata.append("category", category);
+  formdata.append("price", price);
+
+
+  changeListener = function () {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+          jsonThis(xhr.responseText, target);
+      }
+  };
+
+  xhr.open("POST", "SQL/addProductImageSQL.php", true);
+  //xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhr.onreadystatechange = changeListener;
+  xhr.send(formdata);
 
 }
 //Formatting the way that I want my data to be presnted.
@@ -106,7 +131,7 @@ validateForm = function () {
     if (errors > 0) {
         return false;
     } else {
-        uploadedFile();
+        uploadedProduct();
     }
 }
 //Waits and Checks to see when the submit button has been pressed.

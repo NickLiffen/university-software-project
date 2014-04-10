@@ -3,7 +3,6 @@ function ajaxModify(productID, str, target) {
     var xhr, id
         xhr = new XMLHttpRequest();
     id = productID;
-
     changeListener = function () {
         if (xhr.readyState == 4 && xhr.status == 200) {
             updateProduct(xhr.responseText, str, target);

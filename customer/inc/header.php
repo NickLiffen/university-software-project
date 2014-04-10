@@ -9,9 +9,8 @@
 <meta http-equiv="Content-Script-Type" content="text/javascript">
 <link rel="stylesheet" type="text/css" href="../css/style.css">
 <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-<?php
-include("../database/connect_database.php");
-?>
+<?php include("../database/connect_database.php"); ?>
+<script src="../inc.js"></script>
 <body>
 	<div class='wrapper'>
 	<div id="box">
