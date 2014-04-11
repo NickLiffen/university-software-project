@@ -57,31 +57,31 @@ validateForm = function () {
     //Checks the name value of the form is entered.
     var a = document.forms["myForm"]["name"].value;
     if (a == null || a == "") {
-        document.getElementById('errorname').innerHTML = "Please enter a name";
+        _('errorname').innerHTML = "Please enter a name";
         errors = errors + 1;
     }
     //Checks the quantity value is entered.
     var b = document.forms["myForm"]["quantity"].value;
     if (b == null || b == "") {
-        document.getElementById('errorquantity').innerHTML = "Please enter a quantity";
+        _('errorquantity').innerHTML = "Please enter a quantity";
         errors = errors + 1;
     }
     //Checks the description part is entered.
     var c = document.forms["myForm"]["description"].value;
     if (c == null || c == "") {
-        document.getElementById('errordescription').innerHTML = "Please enter a description";
+        _('errordescription').innerHTML = "Please enter a description";
         errors = errors + 1;
     }
     //Checks to see if a category has been entered.
     var d = document.forms["myForm"]["category"].value;
     if (d == null || d == "") {
-        document.getElementById('errorcategory').innerHTML = "Please enter a category";
+        _('errorcategory').innerHTML = "Please enter a category";
         errors = errors + 1;
     }
     //Checks to see if the price has been entered.
     var e = document.forms["myForm"]["price"].value;
     if (e == null || e == "") {
-        document.getElementById('errorprice').innerHTML = "Please enter a price";
+        _('errorprice').innerHTML = "Please enter a price";
         errors = errors + 1;
     }
     //If there are any errors are found it returns false but if not it proccedds.

@@ -36,7 +36,7 @@ function updateProduct(jsonObj, target, str) {
 }
 //Sends through the final information to be updated.
 function finalUpdate(str, newTarget) {
-    var fetchSubmitButton = document.getElementById("submitNew");
+    var fetchSubmitButton = _("submitNew");
     if (fetchSubmitButton) {
         fetchSubmitButton.addEventListener("click", function () {
             //Creates Varaibles.

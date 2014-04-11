@@ -27,7 +27,7 @@ function listAllItems() {
 /* This function waits and sees when the user hovers over the basket, when they do, a DIV is made visible. When the user hovers away from the basket the div is hidden. This function also allows the user to hover over the div to
 amend there product information.*/
 function basketOnHoverLoad(target) {
-    var getBasket = document.getElementsByClassName("basketSurrounding");
+    var getBasket = _c("basketSurrounding");
     //When the user hovers over the basket and div showing prodict information
     for (var i = 0, j = getBasket.length; i < j; i++) {
         getBasket[i].addEventListener("mouseover", function () {
@@ -71,7 +71,7 @@ function changesInBasket() {
 }
 //Updates the product total in basket
 function modifyProduct(){
-var getModifyButton = document.getElementsByClassName("modifyProductFromBasket");
+var getModifyButton = _c("modifyProductFromBasket");
   for (var i = 0, j = getModifyButton.length; i < j; i++) {
       getModifyButton[i].addEventListener("click", function (event) {
 
@@ -88,7 +88,7 @@ var getModifyButton = document.getElementsByClassName("modifyProductFromBasket")
           var totalinDB = +asObject[0].quantity;
 
           //THIS DOESN'T WORK
-          var newQuantity = document.getElementsByClassName("modifyQuantityInLocalStorage");
+          var newQuantity = _c("modifyQuantityInLocalStorage");
           for (var i = 0, j = getModifyButton.length; i < j; i++) {
               var newValue = newQuantity[i].value;
             }
@@ -109,7 +109,7 @@ var getModifyButton = document.getElementsByClassName("modifyProductFromBasket")
 }
 //Removes Product from Local Storage & Basket
 function removeProduct(){
-  var getRemoveButton = document.getElementsByClassName("removeProductFromBasket");
+  var getRemoveButton = _c("removeProductFromBasket");
     for (var i = 0, j = getRemoveButton.length; i < j; i++) {
         getRemoveButton[i].addEventListener("click", function (event) {
             //Bubbles up and finds the ID, then deletes it.

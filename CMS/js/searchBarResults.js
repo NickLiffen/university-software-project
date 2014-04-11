@@ -3,8 +3,8 @@
 function searchAJAX(str) {
   var target;
     if (str.length == 0) {
-        document.getElementById("collectInfo").innerHTML = "";
-        document.getElementById("collectInfo").style.border = "0px";
+        _("collectInfo").innerHTML = "";
+        _("collectInfo").style.border = "0px";
         return;
     }
     target = _("collectInfo");
@@ -12,7 +12,7 @@ function searchAJAX(str) {
 }
 //This function sends through the letters to the AJAC function.
 function pageLoaded(str) {
-    var fetchbutton = document.getElementById("searchBox");
+    var fetchbutton = _("searchBox");
     if (fetchbutton) {
         fetchbutton.addEventListener("focus", searchAJAX(str));
     }
@@ -50,9 +50,9 @@ function json(jsonObj, target, str) {
 //This function collects the buttons for Deleting and Modiying a product.
 function getButtons(str, target) {
     //Gets the button that says 'Remove'
-    var fetchRemoveButton = document.getElementsByClassName("delete");
+    var fetchRemoveButton = _c("delete");
     //Gets the button that says 'Modify'
-    var fetchModifyButton = document.getElementsByClassName("modify");
+    var fetchModifyButton = _c("modify");
     //Remove Button.
     for (var i = 0, j = fetchRemoveButton.length; i < j; i++) {
         fetchRemoveButton[i].addEventListener("click", function () {

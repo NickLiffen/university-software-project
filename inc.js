@@ -32,7 +32,7 @@ function ajaxPost(url,vars,callback,target, extra) {
     callback(xhr.responseText, target, extra);
   }
   xhr.open("POST", url, true);
-  //xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+  //I don't set a request header becuase whenever I use POST I do my encription on the form.
   xhr.send(vars);
 }
 //Returns true or false to see if an object is empty.
@@ -45,3 +45,22 @@ function isEmpty(obj) {
     }
     return true;
 }
+function outputReturnedObject(jsonObj,target,message, extra) {
+    target.innerHTML = "";
+    var json_output = JSON.parse(jsonObj);
+    if (isEmpty(json_output)) {
+        target.innerHTML = message;
+    } else {
+        //Starts the loop
+        for (var i = 0; i < json_output.length; i++) {
+            output;
+            //This outputs the output
+            target.innerHTML += output;
+            getButtons(target, extra);
+        }
+    }
+}
+
+
+
+outputReturnedObject(jsonObj,target,message, extra)

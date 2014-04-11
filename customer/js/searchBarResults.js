@@ -1,12 +1,12 @@
 //AJAX functions that collects athe onkeyup search bar.
 function searchAJAX(str) {
     if (str.length == 0) {
-        document.getElementById("collectInfo").innerHTML = "";
-        document.getElementById("collectInfo").style.border = "0px";
+        _("collectInfo").innerHTML = "";
+        _("collectInfo").style.border = "0px";
         return;
     }
     xhr = new XMLHttpRequest();
-    target = document.getElementById("collectInfo");
+    target = _("collectInfo");
     changeListener = function () {
         if (xhr.readyState == 4 && xhr.status == 200) {
             json(xhr.responseText, target);
