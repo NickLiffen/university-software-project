@@ -14,7 +14,6 @@ function updateProduct(jsonObj, target, str) {
 
     //Starts the loop and prints out the form.
     for (var i = 0; i < json_output.length; i++) {
-
         var output = "<fieldset><legend><span>Would you like to Update a product?</span></legend>" +
             "<form method='post' id = 'Form' enctype='multipart/form-data' name='Form' onsubmit='return false;'>" +
             "<br />" +

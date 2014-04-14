@@ -9,16 +9,15 @@ function searchAJAX(str) {
     target = _("collectInfo");
     changeListener = function () {
         if (xhr.readyState == 4 && xhr.status == 200) {
-            json(xhr.responseText, target);
+            json(xhr.responseText, target, str);
         }
     };
 
     var price = _("price").value;
     var minPrice = _("minPrice").value;
     var maxPrice = _("maxPrice").value;
-    var minStock = _("stockRemain").value;
 
-    xhr.open("GET", "SQL/searchDatabaseSQL.php?str=" + str + "&price=" + price + "&minPrice=" + minPrice + "&maxPrice=" + maxPrice + "&minStock=" + minStock, true);
+    xhr.open("GET", "SQL/searchDatabaseSQL.php?str=" + str + "&price=" + price + "&minPrice=" + minPrice + "&maxPrice=" + maxPrice, true);
     xhr.onreadystatechange = changeListener;
     xhr.send();
 }
@@ -30,29 +29,11 @@ function pageLoaded(str) {
     searchFeatures.style.display = 'block';
   }
     var price = _("price");
-    var fetchbutton = _("searchBox");
     var priceButton = _("priceButton");
-    var minStock = _("stockButton");
-
-    if (fetchbutton) {
-        fetchbutton.addEventListener("focus", searchAJAX(str));
-    }
-
-    if (price) {
-        price.addEventListener("change", searchAJAX(str));
-    }
-
-    if (priceButton) {
-        priceButton.addEventListener("click", searchAJAX(str));
-    }
-
-    if (minStock) {
-        minStock.addEventListener("click", searchAJAX(str));
-    }
 
 }
 
-function json(jsonObj, target) {
+function json(jsonObj, target, str) {
     //Sets the page content to nothing so we don't see multiple of the same products on screen.
     target.innerHTML = "";
     var json_output = JSON.parse(jsonObj);
@@ -63,7 +44,6 @@ function json(jsonObj, target) {
         //Starts the loop
         //Starts the loop
         for (var i = 0; i < json_output.length; i++) {
-
             var output = "<div id='item" + json_output[i].id + "' class='item'>" +
                 '<h3> Product Name: ' + json_output[i].name + '</h3>' +
                 "<p><img src='../CMS/Images/" + json_output[i].id + ".jpg'> </p>" +
@@ -77,4 +57,15 @@ function json(jsonObj, target) {
             target.innerHTML += output;
         }
     }
+    pageLoaded(str)
 }
+function getSearchBar(){
+    var getSearch;
+    getSearch = _("searchBox");
+    if(getSearch){
+      getSearch.addEventListener("keyup", function(){
+        getSearch.addEventListener("focus", searchAJAX(this.value));
+      });
+  }
+}
+window.addEventListener("load", getSearchBar());

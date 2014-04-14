@@ -3,7 +3,7 @@
     <h2 class='middle'>Stock Levels</h2>
 
     <section>
-        <h3>Search products with stock level less then: <input type='search' id='searchForProducts' placeholder'Search Here' onkeyup="pageLoaded(this.value)" autofocus/><span id='searchBarValidate'></span></h3>
+        <h3>Search products with stock level less then: <input type='search' id='searchForProducts' placeholder'Search Here' autofocus/><span id='searchBarValidate'></span></h3>
         <div id='searchStockTarget'></div>
     </section>
 

@@ -82,3 +82,14 @@ function getButtons(str, target) {
         });
     }
 }
+
+function getSearchBar(){
+    var getSearch;
+    getSearch = _("searchBox");
+    if(getSearch){
+      getSearch.addEventListener("keyup", function(){
+        getSearch.addEventListener("focus", searchAJAX(this.value));
+      });
+  }
+}
+window.addEventListener("load", getSearchBar());

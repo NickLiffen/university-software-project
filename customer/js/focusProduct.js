@@ -54,29 +54,35 @@ function injectIntoFocus(product_id, productTotalInDB, data) {
     }
     var oldTarget =   _("collectInfo");
     var focusTarget = _("focusProduct");
-    oldTarget.innerHTML = "";
+    var value = _("searchBox");
+    if(value){
+      value = value.value;
+    }
+    oldTarget.style.display = 'none';
     focusTarget.innerHTML = data;
     basketButtonLoad(product_id, productTotalInDB, focusTarget);
-    backButton(focusTarget);
-    closeFocus(focusTarget);
+    backButton(focusTarget, oldTarget, value);
+    closeFocus(focusTarget, oldTarget, value);
 }
 //Closes the Focus through pressing the back button.
-function backButton(focusTarget){
+function backButton(focusTarget, oldTarget, value){
   var backButtonPressed = _("backButtonPress");
   if(backButtonPressed){
   backButtonPressed.addEventListener("click", function() {
     focusTarget.innerHTML = "";
-    pageLoaded("");
+    oldTarget.style.display = 'block';
+    pageLoaded(value);
   });
 }
 }
 //Closes the Focus using the ESC key
-function closeFocus(focusTarget) {
+function closeFocus(focusTarget, oldTarget, value) {
     document.onkeydown = function (evt) {
         evt = evt || window.event;
         if (evt.keyCode == 27) {
             focusTarget.innerHTML = "";
-            pageLoaded("");
+            oldTarget.style.display = 'block';
+            pageLoaded(value);
         }
     }
 };

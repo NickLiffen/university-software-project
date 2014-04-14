@@ -45,22 +45,3 @@ function isEmpty(obj) {
     }
     return true;
 }
-function outputReturnedObject(jsonObj,target,message, extra) {
-    target.innerHTML = "";
-    var json_output = JSON.parse(jsonObj);
-    if (isEmpty(json_output)) {
-        target.innerHTML = message;
-    } else {
-        //Starts the loop
-        for (var i = 0; i < json_output.length; i++) {
-            output;
-            //This outputs the output
-            target.innerHTML += output;
-            getButtons(target, extra);
-        }
-    }
-}
-
-
-
-outputReturnedObject(jsonObj,target,message, extra)

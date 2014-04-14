@@ -21,7 +21,7 @@
     <div id="searchbox">
         <form method="GET" name="seachForm">
             <p>Search Box:
-                <input type="search" id="searchBox" placeholder="Search for Products" onkeyup="pageLoaded(this.value)" class="mytext" autofocus/>
+                <input type="search" id="searchBox" placeholder="Search for Products" class="mytext" autofocus/>
             </p>
             <form>
     </div>
@@ -40,11 +40,6 @@
                 <input type="text" id="maxPrice" placeholder="Maxiumim Price">
                 <input type="button" id="priceButton" value="Sort">
             </p>
-            <h3>Stock</h3>
-            <p>Minimum Remaining Stock:</p>
-            <input type="text" id="stockRemain" placeholder="Minimum Stock Left..">
-            <input type="button" id="stockButton" value="Sort">
-        </p>
     </section>
 </div>
 

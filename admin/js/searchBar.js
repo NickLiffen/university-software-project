@@ -61,9 +61,18 @@ function searchResults(jsonObj, target, str) {
         }
     }
 }
+function getSearchBar(){
+    var getSearch;
+    getSearch = _("searchForProducts");
+    if(getSearch){
+      getSearch.addEventListener("keyup", function(){
+        getSearch.addEventListener("focus", validateNumber(this.value));
+      });
+  }
+}
 //Sets the load listeners
 function setListeners() {
+    getSearchBar()
     lowStock();
 }
-
 window.addEventListener("load", setListeners());
