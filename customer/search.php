@@ -40,10 +40,9 @@
                 <input type="button" id="priceButton" value="Sort">
             </p>
     </section>
+    <h3>Categories</h3>
     <!--This is where the products get loaded into the page for the categories...-->
     <div id="categoriesLoadInto"></div>
-    <!--This is where the products get loaded into the page for the categories...-->
-    <div id="categoriesProducts"></div>
 </div>
 
 
