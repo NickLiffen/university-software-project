@@ -21,7 +21,16 @@ function updateProduct(jsonObj, target, str) {
             "<p>Please Update the Product Name: *<input type='text' id='nameUpdate' name='nameUpdate' value = " + json_output[i].name + " > </p>" +
             "<p>Please Update the Product Quantity: *<input type='text' id='quantityUpdate' name='quantityUpdate' value = " + json_output[i].quantity + " > </p>" +
             "<p>Please Update the Product Description: *<input type='text' id='descriptionUpdate' name='descriptionUpdate' value = " + json_output[i].description + " > </p>" +
-            "<p>Please Update the Product Category: *<input type='text' id='categoryUpdate' name='categoryUpdate' value = " + json_output[i].category + " > </p>" +
+            "<p>Please enter a product category:* <select id='categoryDropDown'>" +
+              "<option value=  " + json_output[i].category + " > " + json_output[i].category +  "</option>" +
+              "<option value='clothing'>Clothing</option>" +
+              "<option value='electronics'>Electronics</option>" +
+              "<option value='software'>Software</option>" +
+              "<option value='sport'>Sport</option>" +
+              "<option value='music'>Music</option>" +
+              "<option value='household'>Household</option>" +
+              "<option value='other'>Other</option>" +
+            "</select></p>" +
             "<p>Please Update the Product Price: *<input type='text' id='priceUpdate' name='priceUpdate' value = " + json_output[i].price + " > </p>" +
             "<br />" +
             "<input name='submitNew' id='submitNew' type='button' value='Update Product'/>" +
@@ -39,13 +48,14 @@ function finalUpdate(str, newTarget) {
     if (fetchSubmitButton) {
         fetchSubmitButton.addEventListener("click", function () {
             //Creates Varaibles.
-            var idUpdate, nameUpdate, quantityUpdate, descriptionUpdate, categoryUpdate, priceUpdate;
+            var idUpdate, nameUpdate, quantityUpdate, descriptionUpdate, categoryUpdate, categoryText, priceUpdate;
             //All the files brought in from the form.
             idUpdate = _("idUpdate").value;
             nameUpdate = _("nameUpdate").value;
             quantityUpdate = _("quantityUpdate").value;
             descriptionUpdate = _("descriptionUpdate").value;
-            categoryUpdate = _("categoryUpdate").value;
+            categoryText = _("categoryDropDown");
+            categoryUpdate = categoryText.options[categoryText.selectedIndex].text;
             priceUpdate = _("priceUpdate").value;
             //FormData is a safe and easy method of posting data.
             var formdata = new FormData();

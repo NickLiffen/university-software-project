@@ -36,6 +36,8 @@ function pageLoaded(str) {
 function json(jsonObj, target, str) {
     //Sets the page content to nothing so we don't see multiple of the same products on screen.
     target.innerHTML = "";
+    targetOld = _("categoriesProducts");
+    targetOld.innerHTML = "";
     var json_output = JSON.parse(jsonObj);
     //Checks to see if anything has come back from the search. If nothing has. Prints out message.
     if (isEmpty(json_output)) {

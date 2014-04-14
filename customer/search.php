@@ -28,7 +28,6 @@
 
     <section class="searchRight">
         <h2>Search Options</h2>
-        <h3>Price</h3>
         <p>Sort by:
             <select id="price">
                 <option value="maxPrice">maxPrice</option>
@@ -41,6 +40,10 @@
                 <input type="button" id="priceButton" value="Sort">
             </p>
     </section>
+    <!--This is where the products get loaded into the page for the categories...-->
+    <div id="categoriesLoadInto"></div>
+    <!--This is where the products get loaded into the page for the categories...-->
+    <div id="categoriesProducts"></div>
 </div>
 
 
@@ -54,6 +57,8 @@
 </section>
 
 
+<!--Collects the Results back from the search bar.-->
+<script src="js/categories.js"></script>
 <!--Collects the Results back from the search bar.-->
 <script src="js/searchBarResults.js"></script>
 <!--Loads the Modal when you click on a specific product.-->

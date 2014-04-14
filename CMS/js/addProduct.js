@@ -1,14 +1,15 @@
 var pageLoaded, validateForm;
 //Sends through my product information.
 function uploadedProduct() {
-    var file, name, description, quantity, category, price, target, vars;
+    var file, name, description, quantity, category, categoryText, price, target, vars;
     //Collectting varibles. All using my _ function that collects ID's.
     file = _("file1").files[0];
     target = _("status");
     name = _("name").value;
     description = _("description").value;
     quantity = _("quantity").value;
-    category = _("category").value;
+    categoryText = _("categoryDropDown");
+    category = categoryText.options[categoryText.selectedIndex].text;
     price = _("price").value
     //FormData is a safe and easy method of posting data.
     var formdata = new FormData();
@@ -73,8 +74,9 @@ validateForm = function () {
         errors = errors + 1;
     }
     //Checks to see if a category has been entered.
-    var d = document.forms["myForm"]["category"].value;
-    if (d == null || d == "") {
+    var d = _("categoryDropDown");
+    var strUser = d.options[d.selectedIndex].value;
+    if (strUser == "selectCategory") {
         _('errorcategory').innerHTML = "Please enter a category";
         errors = errors + 1;
     }

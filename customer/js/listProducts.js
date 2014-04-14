@@ -3,6 +3,7 @@ function pageLoaded() {
     var target, title;
     target = _("collectInfo");
     target.innerHTML = "";
+    target.style.display = 'block';
     title = _("disapearOnCheckout");
     title.style.display = 'block';
     ajaxGet("SQL/collectProductsSQL.php", json, target, null);
