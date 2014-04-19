@@ -6,8 +6,9 @@ function countOpenOrders() {
 }
 //Function that checks the number and tells the webiste what to do with it
 function checkInput(jsonObj, target) {
-    var newTarget = _("openOrdersTarget");
-    var toNumber = +jsonObj;
+  var newTarget, toNumber
+    newTarget = _("openOrdersTarget");
+    toNumber = +jsonObj;
     target.innerHTML = toNumber;
     if (toNumber < 1) {
         newTarget.innerHTML = "You have no products in the open order status";
@@ -21,13 +22,12 @@ function collectOpenOrders(newTarget) {
 }
 //Outputs it the way I want it.
 function jsonOutputOpenOrders(jsonObj, newTarget) {
+  var json_output, output;
     newTarget.innerHTML = "";
-    var json_output = JSON.parse(jsonObj);
-
+    json_output = JSON.parse(jsonObj);
     //Starts the loop
     for (var i = 0; i < json_output.length; i++) {
-
-        var output = "<div id='item" + json_output[i].id + "' class='item'>" +
+        output = "<div id='item" + json_output[i].id + "' class='item'>" +
             '<p> Address Line One: ' + json_output[i].addressLineOne + '</p>' +
             "<p> Address Line Two: " + json_output[i].addressLineTwo + '</p>' +
             '<p> County: ' + json_output[i].county + '</p>' +

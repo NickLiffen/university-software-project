@@ -6,11 +6,12 @@ function getCategories(){
 }
 
 function jsonCategories(jsonObj, target){
-  var json_output = JSON.parse(jsonObj);
+  var json_output, output
+  json_output = JSON.parse(jsonObj);
   //Starts the loop
   //target.innerHTML += "Search by Category";
   for (var i = 0; i < json_output.length; i++) {
-      var output = "<div id='item" + json_output[i].category + "' class='item'>" +
+      output = "<div id='item" + json_output[i].category + "' class='item'>" +
           "<p><a href = ''>"+ json_output[i].category + '</a></p>' +
           "</div>";
       target.innerHTML += output;
@@ -19,33 +20,33 @@ function jsonCategories(jsonObj, target){
 }
 
 function collectIndividualCategories(){
-  var categoryContainer = _("categoriesLoadInto");
+  var categoryContainer, e, data, newData;
+  categoryContainer = _("categoriesLoadInto");
   categoryContainer.addEventListener("click", function (event) {
     event.preventDefault();
-      var e = event.target;
+      e = event.target;
       while (e.id.indexOf('item') == -1) {
           e = e.parentNode;
       }
-      var data = e.id;
-      var newData = data.replace("item","");
+      data = e.id;
+      newData = data.replace("item","");
       ajaxGet("SQL/searchCategoriesDatabaseSQL.php?str=" + newData, jsonCategoriesOutput, null, null);
     });
 
 }
 
 function jsonCategoriesOutput(jsonObj){
-var targetOld, target;
+var target, json_output, output;
 target = _("collectInfo");
 target.innerHTML = "";
-var json_output = JSON.parse(jsonObj);
-
+json_output = JSON.parse(jsonObj);
 
 if (isEmpty(json_output)) {
     target.innerHTML = "<div class='noResults'><p>No Catergoies where found, Sorry!<p></div>";
 } else {
     //Starts the loop
     for (var i = 0; i < json_output.length; i++) {
-        var output = "<div id='item" + json_output[i].id + "' class='item'>" +
+        output = "<div id='item" + json_output[i].id + "' class='item'>" +
             "<h2> Product Name: " + json_output[i].name + '</h2>' +
             "<p><img src='../CMS/images/" + json_output[i].id + ".jpg'> </p>" +
             "<p> Amount in Stock: " + json_output[i].quantity + '</p>' +
@@ -57,8 +58,4 @@ if (isEmpty(json_output)) {
       }
     }
 }
-
-
-
-
 window.addEventListener("load", getCategories());

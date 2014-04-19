@@ -4,12 +4,13 @@ function ajaxDelete(productID, str) {
 }
 //Makes the message visible for 1 second.
 function deleteMessage(object, str) {
-    var messsage = _("productDeleteShow").style.display = "block";
+  var message;
+    messsage = _("productDeleteShow").style.display = "block";
     window.setTimeout(vanishText, 1000);
     searchAJAX(str);
 }
 //Makes both the display of Modify and Delete Messages none.
 function vanishText(str) {
-    var messsage = _("productModifyShow").style.display = 'none';
-    var messsage = _("productDeleteShow").style.display = 'none';
+    _("productModifyShow").style.display = 'none';
+    _("productDeleteShow").style.display = 'none';
 }

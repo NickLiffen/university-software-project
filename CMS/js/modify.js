@@ -4,17 +4,18 @@ function ajaxModify(productID, str, target) {
 }
 //Shows the new form that allows the user to enter in the new information.
 function updateProduct(jsonObj, target, str) {
-    var json_output = JSON.parse(jsonObj);
+  var json_output, newTarget, output;
+    json_output = JSON.parse(jsonObj);
     //Removes all other products from the page. Focuses the user on that one specific update form.
     target.innerHTML = "";
-    var newTarget = _("modifyResult");
+    newTarget = _("modifyResult");
     //Removes all other forms that have been on the page before. The user only wants to see the current form not all the previous ones.
     newTarget.innerHTML = "";
     newTarget.style.display = "block";
 
     //Starts the loop and prints out the form.
     for (var i = 0; i < json_output.length; i++) {
-        var output = "<fieldset><legend><span>Would you like to Update a product?</span></legend>" +
+        output = "<fieldset><legend><span>Would you like to Update a product?</span></legend>" +
             "<form method='post' id = 'Form' enctype='multipart/form-data' name='Form' onsubmit='return false;'>" +
             "<br />" +
             "<input type = 'hidden'  id='idUpdate' name = 'id' value = " + json_output[i].id + " > " +
@@ -44,11 +45,12 @@ function updateProduct(jsonObj, target, str) {
 }
 //Sends through the final information to be updated.
 function finalUpdate(str, newTarget) {
-    var fetchSubmitButton = _("submitNew");
+  var fetchSubmitButton;
+    fetchSubmitButton = _("submitNew");
     if (fetchSubmitButton) {
         fetchSubmitButton.addEventListener("click", function () {
             //Creates Varaibles.
-            var idUpdate, nameUpdate, quantityUpdate, descriptionUpdate, categoryUpdate, categoryText, priceUpdate;
+            var idUpdate, nameUpdate, quantityUpdate, descriptionUpdate, categoryUpdate, categoryText, priceUpdate, formData;
             //All the files brought in from the form.
             idUpdate = _("idUpdate").value;
             nameUpdate = _("nameUpdate").value;
@@ -58,7 +60,7 @@ function finalUpdate(str, newTarget) {
             categoryUpdate = categoryText.options[categoryText.selectedIndex].text;
             priceUpdate = _("priceUpdate").value;
             //FormData is a safe and easy method of posting data.
-            var formdata = new FormData();
+            formdata = new FormData();
             formdata.append("idUpdate", idUpdate);
             formdata.append("nameUpdate", nameUpdate);
             formdata.append("quantityUpdate", quantityUpdate);
@@ -72,8 +74,9 @@ function finalUpdate(str, newTarget) {
 }
 //Shows the user the modified message.
 function modifyMessage(jsonObj, newTarget, str) {
+  var message;
     newTarget.style.display = "none";
-    var messsage = _("productModifyShow").style.display = "block";
+    messsage = _("productModifyShow").style.display = "block";
     window.setTimeout(vanishText, 1000);
     searchAJAX(str);
 }

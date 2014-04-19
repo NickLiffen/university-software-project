@@ -1,7 +1,8 @@
 //This function collects the content for what I want to be in the checkout page
 function getContent(clearScreen) {
+    var target, outputNew;
     //Gets the div where everything is going to be put.
-    var target = _("checkout");
+    target = _("checkout");
     target.style.display = 'block';
     target.innerHTML = " ";
     target.innerHTML = "<h2 class='middle'>Checkout</h2>";
@@ -24,7 +25,7 @@ function getContent(clearScreen) {
 
     target.innerHTML += "<h2>Please Enter Your Address:</h2>";
     //This outputs the form that allows the user to enter there address.
-    var outputNew = "<fieldset><legend><span>Please Enter your Address?</span></legend>" +
+    outputNew = "<fieldset><legend><span>Please Enter your Address?</span></legend>" +
         "<form method='post' id='Form' enctype='multipart/form-data' name='Form' onsubmit='return false;'>" +
         "<br />" +
         "<p>First Line of Address: *<input type='text' name ='firstLineAddressValue' id='firstLineAddressValue' placeholder='Enter Here'/><span id='errorOne'></span></p>" +
@@ -47,39 +48,41 @@ function getContent(clearScreen) {
 }
 //Validates the Form that allows the user to enter a product to the database.
 function validateAddress(target, clearScreen) {
-    var finalButton = _("finalCheckout");
+  var finalButton;
+    finalButton = _("finalCheckout");
     if (finalButton) {
         finalButton.addEventListener("click", function () {
+          var errors, a, c, d, e, errorOne, errorTwo, errorThree, errorFour;
             //Sets errors to 0
-            var errors = 0;
+            errors = 0;
             //Checks the name value of the form is entered.
-            var a = document.forms["Form"]["firstLineAddressValue"].value;
+             a = document.forms["Form"]["firstLineAddressValue"].value;
             if (a == null || a == "") {
-                var errorOne = _('errorOne')
+                errorOne = _('errorOne')
                 errorOne.style.color = 'red';
                 errorOne.innerHTML = "Please enter an address";
                 errors = errors + 1;
             }
             //Checks the description part is entered.
-            var c = document.forms["Form"]["countyNumber"].value;
+             c = document.forms["Form"]["countyNumber"].value;
             if (c == null || c == "") {
-                var errorTwo = _('errorTwo');
+                errorTwo = _('errorTwo');
                 errorTwo.style.color = 'red';
                 errorTwo.innerHTML = "Please enter a county";
                 errors = errors + 1;
             }
             //Checks to see if a category has been entered.
-            var d = document.forms["Form"]["postCodeValue"].value;
+             d = document.forms["Form"]["postCodeValue"].value;
             if (d == null || d == "") {
-                var errorThree = _('errorThree')
+                errorThree = _('errorThree')
                 errorThree.style.color = "red";
                 errorThree.innerHTML = "Please enter a PostCode";
                 errors = errors + 1;
             }
             //Checks to see if the price has been entered.
-            var e = document.forms["Form"]["contactNumberValue"].value;
+             e = document.forms["Form"]["contactNumberValue"].value;
             if (e == null || e == "") {
-                var errorFour = _('errorFour');
+                errorFour = _('errorFour');
                 errorFour.style.color = "red";
                 errorFour.innerHTML = "Please enter a number";
                 errors = errors + 1;
@@ -96,7 +99,7 @@ function validateAddress(target, clearScreen) {
 //This actually runs the ajax request
 function runAJAX(target, clearScreen) {
     //Creates Varaibles.
-    var addressLineOne, addressLineTwo, county, postCode, contatNumber, noOfProducts;
+    var addressLineOne, addressLineTwo, county, postCode, contatNumber, noOfProducts, formdata;
     //All the files brought in from the form.
     addressLineOne = _("firstLineAddressValue").value;
     addressLineTwo = _("secondLineAddressValue").value;
@@ -105,7 +108,7 @@ function runAJAX(target, clearScreen) {
     contactNumber = _("contactNumberValue").value
     noOfProducts = localStorage.length;
     //FormData is a safe and easy method of posting data.
-    var formdata = new FormData();
+    formdata = new FormData();
     formdata.append("addressLineOne", addressLineOne);
     formdata.append("addressLineTwo", addressLineTwo);
     formdata.append("county", county);
@@ -118,19 +121,22 @@ function runAJAX(target, clearScreen) {
 
 //This prints the message saying that the order is being prossed. Ans sets the previous page back to visible.
 function printMessage(JSONobj, target, clearScreen) {
+    var checkoutFinished;
     target.style.display = 'none';
     localStorage.clear();
-    var checkoutFinished = _("checkoutComplete").style.display = 'block';
+    checkoutFinished = _("checkoutComplete").style.display = 'block';
     window.setTimeout(textVanish, 3000);
     updateBasket(clearScreen);
 }
 
 function textVanish() {
-    var checkoutFinished = _("checkoutComplete").style.display = 'none';
+  var checkoutFinished;
+    checkoutFinished = _("checkoutComplete").style.display = 'none';
 }
 //Update the basket length.
 function updateBasket(clearScreen) {
-    var localStorageLength = localStorage.length;
+  var localStorageLength;
+    localStorageLength = localStorage.length;
     basketTotal.innerHTML = localStorageLength;
     runFinal(clearScreen);
 }

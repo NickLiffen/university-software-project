@@ -5,12 +5,13 @@ function totalProducts() {
     ajaxGet("../CMS/SQL/totalProductsSQL.php", totalProductsOutput, targetOne, null);
 }
 function totalProductsOutput(jsonObjOne, targetOne){
-        var json_output = JSON.parse(jsonObjOne);
+  var json_output, output;
+        json_output = JSON.parse(jsonObjOne);
         if (isEmpty(json_output)) {
             targetOne.innerHTML = "You have no products for Sale!";
         } else {
             for (var i = 0; i < json_output.length; i++) {
-                  var output = json_output[i].id;
+                  output = json_output[i].id;
                     targetOne.innerHTML += output;
             }
         }
@@ -25,12 +26,13 @@ function totalSold() {
 
 }
 function totalSoldOutput(jsonObjTwo, targetTwo){
-        var json_output = JSON.parse(jsonObjTwo);
+  var json_output, output;
+        json_output = JSON.parse(jsonObjTwo);
         if (isEmpty(json_output)) {
             targetTwo.innerHTML = "You have no stock!";
         } else {
             for (var i = 0; i < json_output.length; i++) {
-                  var output = json_output[i].id;
+                  output = json_output[i].id;
                     targetTwo.innerHTML += output;
             }
         }
@@ -44,12 +46,13 @@ function countOpenOrders() {
     ajaxGet("SQL/countOpenOrdersSQL.php", countOpenOrdersOutput, targetThree, null);
 }
 function countOpenOrdersOutput(jsonObjTwo, targetThree){
-        var json_output = JSON.parse(jsonObjTwo);
+  var json_output, output;
+        json_output = JSON.parse(jsonObjTwo);
         if (isEmpty(json_output)) {
             targetThree.innerHTML = "You have no open orders!";
         } else {
             for (var i = 0; i < json_output.length; i++) {
-                  var output = json_output[i].id;
+                  output = json_output[i].id;
                     targetThree.innerHTML += output;
             }
         }
@@ -63,12 +66,13 @@ function lowStockRemaining() {
     ajaxGet("SQL/FewStockSQL.php", countLowStockOutput, targetFour, null);
 }
 function countLowStockOutput(jsonObjTwo, targetFour){
-        var json_output = JSON.parse(jsonObjTwo);
+  var json_output, output;
+        json_output = JSON.parse(jsonObjTwo);
         if (isEmpty(json_output)) {
             targetFour.innerHTML = "You have no stock in this bracket!";
         } else {
             for (var i = 0; i < json_output.length; i++) {
-                  var output = json_output[i].id;
+                  output = json_output[i].id;
                     targetFour.innerHTML += output;
             }
         }
@@ -82,12 +86,13 @@ function noStockRemaining() {
     ajaxGet("SQL/noStock.php", countNoStockOutput, targetFive, null);
 }
 function countNoStockOutput(jsonObjTwo, targetFive){
-        var json_output = JSON.parse(jsonObjTwo);
+  var json_output, output;
+        json_output = JSON.parse(jsonObjTwo);
         if (isEmpty(json_output)) {
             targetFive.innerHTML = "You have no products with 0 stock left!";
         } else {
             for (var i = 0; i < json_output.length; i++) {
-                  var output = json_output[i].id;
+                  output = json_output[i].id;
                     targetFive.innerHTML += output;
             }
         }

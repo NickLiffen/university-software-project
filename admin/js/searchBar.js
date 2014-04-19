@@ -1,6 +1,7 @@
 //This function sends through the letters to the AJAC function.
 function pageLoaded(str) {
-    var fetchbutton = _("searchForProducts");
+  var fetchbutton;
+    fetchbutton = _("searchForProducts");
     if (fetchbutton) {
         fetchbutton.addEventListener("focus", validateNumber(str));
     }
@@ -22,9 +23,10 @@ function validateNumber(str) {
     }
     //If it is not a number is prints this message
     else {
+        var error;
         _("hide").style.display = 'block';
         _("searchStockTarget").style.display = 'none';
-        var error = _("searchBarValidate");
+        error = _("searchBarValidate");
         error.style.color = 'red';
         error.innerHTML = 'Must be a number';
         return false;
@@ -38,16 +40,16 @@ function searchBar(str) {
 }
 //Outputs the items the way I want it.
 function searchResults(jsonObj, target, str) {
+  var json_output, output;
     target.innerHTML = "";
-    var json_output = JSON.parse(jsonObj);
+    json_output = JSON.parse(jsonObj);
     //Checks to see if anything has come back from the search. If nothing has. Prints out message.
     if (isEmpty(json_output)) {
         target.innerHTML = "<div class='noResults'><p>You have no stock with less then " + str + " remaining!<p></div>";
     } else {
         //Starts the loop
         for (var i = 0; i < json_output.length; i++) {
-
-            var output = "<div id='item" + json_output[i].id + "' class='item'>" +
+            output = "<div id='item" + json_output[i].id + "' class='item'>" +
                 '<h2> Product Name: ' + json_output[i].name + '</h2>' +
                 "<p><img src='../CMS/Images/" + json_output[i].id + ".jpg'></p>" +
                 "<p class='bold'> Product Quantity: " + json_output[i].quantity + '</p>' +
