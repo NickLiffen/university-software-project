@@ -37,13 +37,14 @@ function pageLoaded(str) {
 }
 
 function json(jsonObj, target, str) {
+  console.log()
   var json_output, output;
     //Sets the page content to nothing so we don't see multiple of the same products on screen.
     target.innerHTML = "";
     json_output = JSON.parse(jsonObj);
     //Checks to see if anything has come back from the search. If nothing has. Prints out message.
     if (isEmpty(json_output)) {
-        target.innerHTML = "<div class='noResults'><p>No Items where found, Sorry!<p></div>";
+        target.innerHTML = "<div class='noResults'><p>No Items where found under " + str + ", Sorry!<p></div>";
     } else {
         //Starts the loop
         //Starts the loop
