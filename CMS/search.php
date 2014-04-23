@@ -2,6 +2,11 @@
 
 <article>
     <section>
+      <h3>Delete All Products per Category?</h3>
+
+      <div id='deleteTroughCategory'></div>
+      <div class ='paddingBottom'></div>
+
         <!--Search bar thats searches for products in the database and this allows them to delete/modify products.-->
         <div id="searchbox">
             <form method="GET" name="seachForm">
@@ -30,6 +35,8 @@
     </section>
 </article>
 <!----------SCRIPTS----------->
+<!--Script that runs the search bar.-->
+<script src="js/categoryDelete.js"></script>
 <!--Script that runs the search bar.-->
 <script src="js/searchBarResults.js"></script>
 <!--Script that Modifies a product.-->

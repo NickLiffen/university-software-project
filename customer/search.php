@@ -41,7 +41,7 @@
                 <input type="button" id="priceButton" value="Sort">
             </p>
     </section>
-    <h3>Categories</h3>
+    <h2>Categories</h2>
     <!--This is where the products get loaded into the page for the categories...-->
     <div id="categoriesLoadInto"></div>
     <div class='paddingBottom'></div>
