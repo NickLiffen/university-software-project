@@ -37,7 +37,7 @@ function jsonOutputOpenOrders(jsonObj, newTarget) {
             '<p> Post Code: ' + json_output[i].postCode + '</p>' +
             '<p> Contact Number: ' + json_output[i].contactNumber + '</p>' +
             '<p> Number of products in sale: ' + json_output[i].noOfProducts + '</p>' +
-            "<p> Update the Order Status: <select id='orderstatusSelect'>" +
+            "<p> Update the Order Status: <select class='orderstatusSelect'>" +
               "<option value=  " + json_output[i].orderStatus + " > " + json_output[i].orderStatus +  "</option>" +
               "<option value='OrderProccess'>Order Being Proccessed</option>" +
               "<option value='OrderTogether'>Order Being Merged</option>" +
@@ -56,9 +56,10 @@ function jsonOutputOpenOrders(jsonObj, newTarget) {
 //Collects the new valye of the order and sends the ID of the Order and the new status
 function orderStatusChange(){
   var statusChange;
-  statusChange = _("orderstatusSelect");
-      statusChange.addEventListener("change", function () {
-        var e, productID, newID, statusChangeUpdate;
+  statusChange = _c('orderstatusSelect');
+  for (var i = 0, j = statusChange.length; i < j; i++) {
+      statusChange[i].addEventListener("change", function (event) {
+        var e, productID, newID, statusChangeUpdate, test;
         e = event.target;
         while (e.id.indexOf('item') == -1) {
             e = e.parentNode;
@@ -66,10 +67,11 @@ function orderStatusChange(){
         productID = e.id;
         //Removes everything but the numbers.
         newID = productID.replace(/[^0-9.]/g, "");
-        statusChangeUpdate = statusChange.options[statusChange.selectedIndex].text;
+        test = newID - 1
+        statusChangeUpdate = statusChange[test].options[statusChange[test].selectedIndex].text;
         updateStatus(newID, statusChangeUpdate);
   });
-
+}
 }
 
 function updateStatus(newID, statusChangeUpdate){
