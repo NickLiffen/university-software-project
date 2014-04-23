@@ -9,7 +9,6 @@
 <meta http-equiv="Content-Script-Type" content="text/javascript">
 <link rel="stylesheet" type="text/css" href="../css/style.css">
 <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-<?php include("../database/connect_database.php"); ?>
 <script src="../inc.js"></script>
 <body>
 	<div class='wrapper'>
@@ -22,9 +21,8 @@
 					<li><a href="search.php">Search</a></li>
 				</ul>
 				<ul class='basketSurrounding'>
-					<li><p><img src="../CMS/images/basket_image.png" alt="Basket"><span id ="basketTotal"></span></p></li>
+					<li><p><img src="../CMS/images/basket_image.png" alt="Basket"><span id ="basketTotal"></span><div id ='basketTotalOnHover'></div></p></li>
 				</ul>
-				<div id ='basketTotalOnHover'></div>
 			</nav>
 		</article>
 	</div>

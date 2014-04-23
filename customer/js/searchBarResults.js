@@ -8,6 +8,7 @@ function searchAJAX(str) {
     }
     xhr = new XMLHttpRequest();
     target = _("collectInfo");
+    target.style.display = 'block';
     changeListener = function () {
         if (xhr.readyState == 4 && xhr.status == 200) {
             json(xhr.responseText, target, str);

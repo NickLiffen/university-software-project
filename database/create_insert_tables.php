@@ -27,6 +27,7 @@ $create_table_address =
 				postCode VARCHAR(15) NOT NULL,
 				contactNumber VARCHAR(35) NOT NULL,
 				noOfProducts int NOT NULL,
+				orderStatus varchar(20) DEFAULT 'Order Generated',
 
 				PRIMARY KEY(ID)
 														)";

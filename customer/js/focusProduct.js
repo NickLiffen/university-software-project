@@ -30,7 +30,9 @@ function jsonFocus(jsonObj) {
         //Collects the product quantity -- (THIS IS FOR THE BASKET!!)
         productTotalInDB = +json_output[i].quantity;
         //This is for the MODAL
-        output = "<input type='button' id='backButtonPress' value ='Back'/>" +
+
+        output = "<h3> The Product! </h3>" +
+        	"<input type='button' id='backButtonPress' value ='Back'/>" +
             "<div id='item" + json_output[i].id + "' class='itemModal'>" +
             "<h2> Product Name: " + json_output[i].name + "</h2>" +
             "<p><img src='../CMS/Images/" + json_output[i].id + ".jpg'></p>" +

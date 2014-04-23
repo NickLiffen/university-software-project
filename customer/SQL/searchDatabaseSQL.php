@@ -6,7 +6,6 @@ include("../../database/connect_database.php");
 	 $price        = $_GET['price'];
 	 $priceMin     = $_GET['minPrice'];
 	 $priceMax     = $_GET['maxPrice'];
-	 $minStock     = $_GET['minStock'];
 
 	//This does the query if the price order is changed
 	 if($price == "maxPrice"){
@@ -27,12 +26,6 @@ include("../../database/connect_database.php");
 		$queryFive = "SELECT id, product_name, product_quantity, product_description, product_category, product_price FROM products WHERE product_name LIKE '%$searchString%' OR product_description LIKE '%$searchString%' ";
 	}
 
-	if($minstock > 0){
-		$querySix = "SELECT id, product_name, product_quantity, product_description, product_category, product_price FROM products WHERE product_quantity < '$minstock'";
-	}
-	else {
-		$querySeven = "SELECT id, product_name, product_quantity, product_description, product_category, product_price FROM products WHERE product_name LIKE '%$searchString%' OR product_description LIKE '%$searchString%' ";
-	}
 
 	$query = "SELECT id, product_name, product_quantity, product_description, product_category, product_price FROM products WHERE product_name LIKE '%$searchString%' OR product_description LIKE '%$searchString%' ORDER BY product_price DESC ";
 

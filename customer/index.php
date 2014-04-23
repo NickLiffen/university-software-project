@@ -1,6 +1,9 @@
 <?php $title="Search Product" ; include( "inc/header.php"); ?>
 <article>
-    <h2 id="disapearOnCheckout" class='middle'>View the Most Recent Products added!!!</h2>
+	<div id='disapearOnCheckout'>
+    <h2 class='middle'>View the Most Recent Products added!!!</h2>
+    <h2 class='middle'>Click anywhere on the Product to see further detail.</h2>
+	</div>
 
     <section>
         <!--The five divs below are for the basket. When the user successfull removes/modifies a product but also pops up with an error message if there isnt enough in stock when they try and modify it.-->
@@ -19,7 +22,6 @@
         </div>
     </section>
 
-
     <section>
         <!--This is where the products get loaded into the page. In this DIV.-->
         <div id="collectInfo"></div>
@@ -27,6 +29,8 @@
         <div id="focusProduct"></div>
         <!--This is where the content for checking out will be.-->
         <div id="checkout"></div>
+        <!--This is where the content for checking out will be.-->
+		<div id="checkoutAddress"></div>
     </section>
 
 
@@ -42,6 +46,7 @@
 <script src="js/basket.js"></script>
 <!--Allows the user to checkout.-->
 <script src="js/checkout.js"></script>
+
 
 </body>
 

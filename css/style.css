@@ -116,6 +116,12 @@ body {
   height: 200px;
   width: 200px;
 }
+.categoryContent{
+  width: 10%;
+  margin-right: 2%;
+  float: left;
+}
+
 .paddingBottom{
   padding-bottom: 20px;
 }
@@ -232,8 +238,9 @@ body {
 #basketTotalOnHover{
   display: none;
   position:absolute;
-  left:80%;
-  top:15%;
+  right:0px;
+  top:50px;
+  width: 200px;
   border:2px solid #a1a1a1;
   background:#dddddd;
   border-radius:25px;
@@ -267,7 +274,6 @@ body {
 .middle{
   text-align: center;
 }
-
 
 /* navigation Bar CSS
 ------------------------------------------*/

@@ -1,29 +1,33 @@
 //This function collects the content for what I want to be in the checkout page
 function getContent(clearScreen) {
-    var target, outputNew;
+    var target, outputNew, targetAddress, output, json_output;
     //Gets the div where everything is going to be put.
     target = _("checkout");
+    targetAddress = _("checkoutAddress");
     target.style.display = 'block';
+    targetAddress.style.display = 'block';
     target.innerHTML = " ";
+    targetAddress.innerHTML = " ";
+
     target.innerHTML = "<h2 class='middle'>Checkout</h2>";
     target.innerHTML += "<h2 class='middle'>Your Items</h2>";
 
     for (var a in localStorage) {
-        var json_output = JSON.parse(localStorage[a]);
+        json_output = JSON.parse(localStorage[a]);
         for (var i = 0; i < json_output.length; i++) {
-            var output = "<div id='item" + json_output[i].id + "' class='item'>" +
+            output = "<div id='item" + json_output[i].id + "' class='item'>" +
                 "<h2> Product Name: " + json_output[i].name + '</h2>' +
                 "<p><img src='../CMS/images/" + json_output[i].id + ".jpg'> </p>" +
-                "<p> Amount in Stock: " + json_output[i].quantity + '</p>' +
+            	"<p> Product Price: £" + json_output[i].price + '</p>' +
                 "<p> Product Description: " + json_output[i].description + '</p>' +
-                "<p> Product Category: " + json_output[i].category + '</p>' +
-                "<p> Product Price: £" + json_output[i].price + '</p>' +
+                "<p> Quantity In Basket: " + json_output[i].BasketTotal +  '</p>' +
+                "<p> Total Cost: £" + (json_output[i].price * json_output[i].BasketTotal) + '</p>' +
                 "</div>";
             target.innerHTML += output;
         }
     }
-
-    target.innerHTML += "<h2>Please Enter Your Address:</h2>";
+    targetAddress.innerHTML += "<div class ='paddingBottom'></div>";
+    targetAddress.innerHTML += "<h2>Please Enter Your Address:</h2>";
     //This outputs the form that allows the user to enter there address.
     outputNew = "<fieldset><legend><span>Please Enter your Address?</span></legend>" +
         "<form method='post' id='Form' enctype='multipart/form-data' name='Form' onsubmit='return false;'>" +
@@ -38,16 +42,16 @@ function getContent(clearScreen) {
         "<div id='statusUpdate'></div>" +
         "</fieldset>";
     //This outputs the form above
-    target.innerHTML += outputNew;
+    targetAddress.innerHTML += outputNew;
 
-    target.innerHTML += "<p class='floatLeftAndStyle'>Please make sure that all the information is correct and the address you have ordered is correct.</p>"
+    targetAddress.innerHTML += "<p class='floatLeftAndStyle'>Please make sure that all the information is correct and the address you have ordered is correct.</p>"
 
-    target.innerHTML += "<div id='finalCheckout'><input type ='button' id='finalCheckout' value='Checkout'/></div>"
+    targetAddress.innerHTML += "<div id='finalCheckout'><input type ='button' id='finalCheckout' value='Checkout'/></div>"
     //This runs the AJAX request for POSTING the address information to the database.
-    validateAddress(target, clearScreen);
+    validateAddress(target, clearScreen, targetAddress);
 }
 //Validates the Form that allows the user to enter a product to the database.
-function validateAddress(target, clearScreen) {
+function validateAddress(target, clearScreen, targetAddress) {
   var finalButton;
     finalButton = _("finalCheckout");
     if (finalButton) {
@@ -91,16 +95,17 @@ function validateAddress(target, clearScreen) {
             if (errors > 0) {
                 return false;
             } else {
-                runAJAX(target, clearScreen);
+                runAJAX(target, clearScreen, targetAddress);
             }
         });
     }
 }
 //This actually runs the ajax request
-function runAJAX(target, clearScreen) {
+function runAJAX(target, clearScreen, targetAddress) {
     //Creates Varaibles.
     var addressLineOne, addressLineTwo, county, postCode, contatNumber, noOfProducts, formdata;
     //All the files brought in from the form.
+    targetAddress.style.display ='none';
     addressLineOne = _("firstLineAddressValue").value;
     addressLineTwo = _("secondLineAddressValue").value;
     county = _("countyNumber").value;

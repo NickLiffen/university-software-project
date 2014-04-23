@@ -14,7 +14,8 @@ include("../../database/connect_database.php");
                             "county" => $row['county'],
                             "postCode" => $row['postCode'],
                             "contactNumber" => $row['contactNumber'],
-                            "noOfProducts" => $row['noOfProducts']
+                            "noOfProducts" => $row['noOfProducts'],
+                            "orderStatus" => $row['orderStatus']
                   );
                 array_push($output,$address);
               }

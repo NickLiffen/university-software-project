@@ -18,6 +18,7 @@
 
 
 <div id="disapearOnCheckout">
+	<h3>Search here, click on a product for more detail!</h3>
     <div id="searchbox">
         <form method="GET" name="seachForm">
             <p>Search Box:
@@ -43,7 +44,9 @@
     <h3>Categories</h3>
     <!--This is where the products get loaded into the page for the categories...-->
     <div id="categoriesLoadInto"></div>
+    <div class='paddingBottom'></div>
 </div>
+
 
 
 <section>
@@ -53,6 +56,8 @@
     <div id="focusProduct"></div>
     <!--This is where the content for checking out will be.-->
     <div id="checkout"></div>
+        <!--This is where the content for checking out will be.-->
+    <div id="checkoutAddress"></div>
 </section>
 
 

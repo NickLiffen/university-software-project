@@ -11,7 +11,7 @@ function jsonCategories(jsonObj, target){
   //Starts the loop
   //target.innerHTML += "Search by Category";
   for (var i = 0; i < json_output.length; i++) {
-      output = "<div id='item" + json_output[i].category + "' class='item'>" +
+      output = "<div id='categoryContent" + json_output[i].category + "' class='categoryContent'>" +
           "<p><a href = ''>"+ json_output[i].category + '</a></p>' +
           "</div>";
       target.innerHTML += output;
@@ -25,17 +25,18 @@ function collectIndividualCategories(){
   categoryContainer.addEventListener("click", function (event) {
     event.preventDefault();
       e = event.target;
-      while (e.id.indexOf('item') == -1) {
+      while (e.id.indexOf('categoryContent') == -1) {
           e = e.parentNode;
       }
       data = e.id;
-      newData = data.replace("item","");
+      newData = data.replace("categoryContent","");
       ajaxGet("SQL/searchCategoriesDatabaseSQL.php?str=" + newData, jsonCategoriesOutput, null, null);
     });
 
 }
 
 function jsonCategoriesOutput(jsonObj){
+	console.log(jsonObj);
 var target, json_output, output;
 target = _("collectInfo");
 target.innerHTML = "";

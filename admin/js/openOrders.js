@@ -6,11 +6,14 @@ function countOpenOrders() {
 }
 //Function that checks the number and tells the webiste what to do with it
 function checkInput(jsonObj, target) {
-  var newTarget, toNumber
+  var newTarget, toNumber, json_output, output;
+  json_output = JSON.parse(jsonObj);
+  for (var i = 0; i < json_output.length; i++) {
+      output = json_output[i].id;
+    }
     newTarget = _("openOrdersTarget");
-    toNumber = +jsonObj;
-    target.innerHTML = toNumber;
-    if (toNumber < 1) {
+    target.innerHTML = output;
+    if (output < 1) {
         newTarget.innerHTML = "You have no products in the open order status";
     } else {
         collectOpenOrders(newTarget);
@@ -34,12 +37,63 @@ function jsonOutputOpenOrders(jsonObj, newTarget) {
             '<p> Post Code: ' + json_output[i].postCode + '</p>' +
             '<p> Contact Number: ' + json_output[i].contactNumber + '</p>' +
             '<p> Number of products in sale: ' + json_output[i].noOfProducts + '</p>' +
+            "<p> Update the Order Status: <select id='orderstatusSelect'>" +
+              "<option value=  " + json_output[i].orderStatus + " > " + json_output[i].orderStatus +  "</option>" +
+              "<option value='OrderProccess'>Order Being Proccessed</option>" +
+              "<option value='OrderTogether'>Order Being Merged</option>" +
+              "<option value='OrderDusparch'>Order Dispatched</option>" +
+              "<option value='OrderCanceled'>Order Canceled</option>" +
+              "<option value='OrderProblem'>Order Problem</option>" +
+          "</select></p>" +
             "</div>";
 
         //This outputs the array
         newTarget.innerHTML += output;
+        orderStatusChange();
+
     }
 }
+//Collects the new valye of the order and sends the ID of the Order and the new status
+function orderStatusChange(){
+  var statusChange;
+  statusChange = _("orderstatusSelect");
+      statusChange.addEventListener("change", function () {
+        var e, productID, newID, statusChangeUpdate;
+        e = event.target;
+        while (e.id.indexOf('item') == -1) {
+            e = e.parentNode;
+        }
+        productID = e.id;
+        //Removes everything but the numbers.
+        newID = productID.replace(/[^0-9.]/g, "");
+        statusChangeUpdate = statusChange.options[statusChange.selectedIndex].text;
+        updateStatus(newID, statusChangeUpdate);
+  });
+
+}
+
+function updateStatus(newID, statusChangeUpdate){
+  var formdata;
+  formdata = new FormData();
+  formdata.append("newID", newID);
+  formdata.append("statusChangeUpdate", statusChangeUpdate);
+  ajaxPost("SQL/updatedOrderStatusSQL.php", formdata, modifyMessage, null, null);
+}
+
+function modifyMessage(jsonObj){
+  var message;
+    message = _("orderUpdateSuccess");
+    message.style.display = "block";
+    window.setTimeout(vanishText, 1000);
+}
+
+function vanishText(){
+  var message;
+    message = _("orderUpdateSuccess");
+    message.style.display = "none";
+}
+
+
 //Set the listeners
 function setListeners() {
     countOpenOrders();

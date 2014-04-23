@@ -2,7 +2,7 @@
   include("../../database/connect_database.php");
 
 
-  $query = "SELECT product_category FROM products ORDER BY product_category DESC";
+  $query = "SELECT  DISTINCT product_category FROM products ORDER BY product_category DESC";
 
   $result = $database->query($query) OR die("Failed query $query");
   echo $database->error;

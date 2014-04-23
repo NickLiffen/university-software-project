@@ -7,6 +7,10 @@
         </p>
     </section>
 
+    <div class="successBasket" id="orderUpdateSuccess">
+        <h1>Order Status Updated</h1>
+    </div>
+
     <section class='floatLeft'>
         <div id='openOrdersTarget'></div>
     </section>

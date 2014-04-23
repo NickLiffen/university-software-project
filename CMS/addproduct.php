@@ -11,20 +11,20 @@
                     &nbsp;
 
                     <p>Please Enter a Product Name:* <input id="name" name=
-                    "name" placeholder="Name" type="text"> <span id=
+                    "name" placeholder="Name" type="text" autofocus> <span id=
                     "errorname"></span> <span class=
-                    "error"><?php echo $nameErr;?></span></p>
+                    "error"></span></p>
 
                     <p>Please enter the quantity of the product you have:*
                     <input id="quantity" name="quantity" placeholder="Quantity"
                     type="number"> <span id="errorquantity"></span>
-                    <span class="error"><?php echo $quantityErr;?></span></p>
+                    <span class="error"></span></p>
 
                     <p>Please enter a small description of the product:*
                     <input id="description" name="description" placeholder=
                     "Description" type="text"> <span id=
                     "errordescription"></span> <span class=
-                    "error"><?php echo $descriptionErr;?></span></p>
+                    "error"></span></p>
 
                     <p>Please enter a product category:*
                       <select id="categoryDropDown">
@@ -62,13 +62,13 @@
 
                     </select>
                       <span id="errorcategory"></span> <span class=
-                      "error"><?php echo $categoryErr;?></span>
+                      "error"></span>
                     </p>
 
                     <p>Please enter in the price of the product:* <input id=
                     "price" name="price" placeholder="Price" type="text">
                     <span id="errorprice"></span> <span class=
-                    "error"><?php echo $priceErr;?></span></p>
+                    "error"></span></p>
 
                     <p>Please Pick an image: <input id="file1" name="file1"
                     type="file"><br>
