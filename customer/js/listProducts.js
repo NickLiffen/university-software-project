@@ -7,6 +7,7 @@ function pageLoaded() {
     title = _("disapearOnCheckout");
     title.style.display = 'block';
     ajaxGet("SQL/collectProductsSQL.php", json, target, null);
+
 };
 //Parses the JSON Object created and formats it to the way I like
 function json(jsonObj, target) {

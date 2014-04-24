@@ -1,5 +1,5 @@
 <?php $title="Search Product" ; include( "inc/header.php"); ?>
-<article>
+<article id ='closeThis'>
 	<div id='disapearOnCheckout'>
     <h2 class='middle'>View the Most Recent Products added!!!</h2>
     <h2 class='middle'>Click anywhere on the Product to see further detail.</h2>
@@ -32,9 +32,6 @@
         <!--This is where the content for checking out will be.-->
 		<div id="checkoutAddress"></div>
     </section>
-
-
-
 </article>
 <!--This is what you first see on the screen. Collects the most recent products in the database.-->
 <script src="js/listProducts.js"></script>

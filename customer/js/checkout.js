@@ -28,7 +28,7 @@ function getContent(clearScreen) {
                           id: json_output[i].id,
                           quantity: json_output[i].BasketTotal
                       }]
-                      console.log(test);
+
         }
     }
     targetAddress.innerHTML += "<div class ='paddingBottom'></div>";

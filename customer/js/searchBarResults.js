@@ -15,11 +15,7 @@ function searchAJAX(str) {
         }
     };
 
-    price = _("price").value;
-    minPrice = _("minPrice").value;
-    maxPrice = _("maxPrice").value;
-
-    xhr.open("GET", "SQL/searchDatabaseSQL.php?str=" + str + "&price=" + price + "&minPrice=" + minPrice + "&maxPrice=" + maxPrice, true);
+    xhr.open("GET", "SQL/searchDatabaseSQL.php?str=" + str, true);
     xhr.onreadystatechange = changeListener;
     xhr.send();
 }
@@ -31,20 +27,45 @@ function pageLoaded(str) {
   if(searchFeatures){
     searchFeatures.style.display = 'block';
   }
-    price = _("price");
-    priceButton = _("priceButton");
+}
+function searchBarFeatures(){
+  var getSelectBox, getLowValue, getHighValue, getPriceButton, searchBox, target;
+  getSelectBox = _('price');
+  getLowValue = _('minPrice');
+  getHighValue = _('maxPrice');
+  getPriceButton = _('priceButton');
+  searchBox = _('searchBox');
+  target = _("collectInfo");
+
+  if(getSelectBox){
+    getSelectBox.addEventListener("change", function(){
+      var str, selectBoxValue;
+      selectBoxValue = getSelectBox.options[getSelectBox.selectedIndex].value;
+      str = searchBox.value;
+      console.log(selectBoxValue);
+      ajaxGet("SQL/orderProductsSQL.php?str=" + str + "&orderByValue=" + selectBoxValue, json, target, str);
+    });
+  }
+  if(getPriceButton){
+    getPriceButton.addEventListener("click", function(){
+      var low, high, str;
+      low = getLowValue.value;
+      high = getHighValue.value;
+      str = searchBox.value;
+      ajaxGet("SQL/productsBetweenPriceSQL.php?str=" + str + "&lowValue=" + low + "&highValue=" + high, json, target, str);
+    });
+  }
 
 }
 
 function json(jsonObj, target, str) {
-  console.log()
   var json_output, output;
     //Sets the page content to nothing so we don't see multiple of the same products on screen.
     target.innerHTML = "";
     json_output = JSON.parse(jsonObj);
     //Checks to see if anything has come back from the search. If nothing has. Prints out message.
     if (isEmpty(json_output)) {
-        target.innerHTML = "<div class='noResults'><p>No Items where found under " + str + ", Sorry!<p></div>";
+        target.innerHTML = "<div class='noResults'><p>No Items where found under your criteria Sorry!<p></div>";
     } else {
         //Starts the loop
         //Starts the loop
@@ -74,3 +95,4 @@ function getSearchBar(){
   }
 }
 window.addEventListener("load", getSearchBar());
+window.addEventListener("load", searchBarFeatures());

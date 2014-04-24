@@ -17,8 +17,8 @@
 		<section class="header"><h1>YABE Shopping Market!</h1></section>
 			<nav>
 				<ul>
-					<li><a href="index.php">Home</a></li>
-					<li><a href="search.php">Search</a></li>
+					<li><a href="index.php" id='buttonForHomePage'>Home</a></li>
+					<li><a href="search.php" id='buttonForSearchPage'>Search</a></li>
 				</ul>
 				<ul class='basketSurrounding'>
 					<li><p><img src="../CMS/images/basket_image.png" alt="Basket"><span id ="basketTotal"></span><div id ='basketTotalOnHover'></div></p></li>
