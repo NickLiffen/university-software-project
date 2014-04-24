@@ -92,8 +92,9 @@ function modifyProduct(){
               asObject = JSON.parse(product);
               totalinDB = +asObject[0].quantity;
 
-              //THIS DOESN'T WORK
-              newQuantity = _c("modifyQuantityInLocalStorage");
+              // IF there is more then one item in basket - THIS DOESN'T WORK
+              newQuantity = document.querySelectorAll('.modifyQuantityInLocalStorage');
+              console.log(newQuantity);
               for (var i = 0, j = getModifyButton.length; i < j; i++) {
                   newValue = newQuantity[i].value;
                 }

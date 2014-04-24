@@ -14,7 +14,7 @@ function checkInput(jsonObj, target) {
     newTarget = _("openOrdersTarget");
     target.innerHTML = output;
     if (output < 1) {
-        newTarget.innerHTML = "You have no products in the open order status";
+        newTarget.innerHTML = "<div class='noResults'><p>You have no products in the open order status</p></div>";
     } else {
         collectOpenOrders(newTarget);
     }
@@ -59,7 +59,7 @@ function orderStatusChange(){
   statusChange = _c('orderstatusSelect');
   for (var i = 0, j = statusChange.length; i < j; i++) {
       statusChange[i].addEventListener("change", function (event) {
-        var e, productID, newID, statusChangeUpdate, test;
+        var e, productID, newID, statusChangeUpdate, stageInClass;
         e = event.target;
         while (e.id.indexOf('item') == -1) {
             e = e.parentNode;
@@ -67,8 +67,8 @@ function orderStatusChange(){
         productID = e.id;
         //Removes everything but the numbers.
         newID = productID.replace(/[^0-9.]/g, "");
-        test = newID - 1
-        statusChangeUpdate = statusChange[test].options[statusChange[test].selectedIndex].text;
+        stageInClass = newID - 1
+        statusChangeUpdate = statusChange[stageInClass].options[statusChange[stageInClass].selectedIndex].text;
         updateStatus(newID, statusChangeUpdate);
   });
 }

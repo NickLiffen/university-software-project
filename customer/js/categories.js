@@ -10,6 +10,10 @@ function jsonCategories(jsonObj, target){
   json_output = JSON.parse(jsonObj);
   //Starts the loop
   //target.innerHTML += "Search by Category";
+  if (isEmpty(json_output)) {
+      target.innerHTML = "<div class='noResults'><p>No Categories where found, Sorry!<p></div>";
+  }
+  else {
   for (var i = 0; i < json_output.length; i++) {
       output = "<div id='categoryContent" + json_output[i].category + "' class='categoryContent'>" +
           "<p><a href = ''>"+ json_output[i].category + '</a></p>' +
@@ -17,6 +21,7 @@ function jsonCategories(jsonObj, target){
       target.innerHTML += output;
   }
   collectIndividualCategories();
+}
 }
 
 function collectIndividualCategories(){

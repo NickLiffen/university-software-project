@@ -1,6 +1,6 @@
 //This function collects the content for what I want to be in the checkout page
 function getContent(clearScreen) {
-    var target, outputNew, targetAddress, output, json_output;
+    var target, outputNew, targetAddress, output, json_output, postData, dataToSend;
     //Gets the div where everything is going to be put.
     target = _("checkout");
     targetAddress = _("checkoutAddress");
@@ -24,6 +24,11 @@ function getContent(clearScreen) {
                 "<p> Total Cost: £" + (json_output[i].price * json_output[i].BasketTotal) + '</p>' +
                 "</div>";
             target.innerHTML += output;
+            dataToSend= [{
+                          id: json_output[i].id,
+                          quantity: json_output[i].BasketTotal
+                      }]
+                      console.log(test);
         }
     }
     targetAddress.innerHTML += "<div class ='paddingBottom'></div>";
@@ -48,10 +53,10 @@ function getContent(clearScreen) {
 
     targetAddress.innerHTML += "<div id='finalCheckout'><input type ='button' id='finalCheckout' value='Checkout'/></div>"
     //This runs the AJAX request for POSTING the address information to the database.
-    validateAddress(target, clearScreen, targetAddress);
+    validateAddress(target, clearScreen, targetAddress, dataToSend);
 }
 //Validates the Form that allows the user to enter a product to the database.
-function validateAddress(target, clearScreen, targetAddress) {
+function validateAddress(target, clearScreen, targetAddress, dataToSend) {
   var finalButton;
     finalButton = _("finalCheckout");
     if (finalButton) {
@@ -95,35 +100,35 @@ function validateAddress(target, clearScreen, targetAddress) {
             if (errors > 0) {
                 return false;
             } else {
-                runAJAX(target, clearScreen, targetAddress);
+                runAJAX(target, clearScreen, targetAddress, dataToSend);
             }
         });
     }
 }
 //This actually runs the ajax request
-function runAJAX(target, clearScreen, targetAddress) {
-    //Creates Varaibles.
-    var addressLineOne, addressLineTwo, county, postCode, contatNumber, noOfProducts, formdata;
-    //All the files brought in from the form.
-    targetAddress.style.display ='none';
-    addressLineOne = _("firstLineAddressValue").value;
-    addressLineTwo = _("secondLineAddressValue").value;
-    county = _("countyNumber").value;
-    postCode = _("postCodeValue").value;
-    contactNumber = _("contactNumberValue").value
-    noOfProducts = localStorage.length;
-    //FormData is a safe and easy method of posting data.
-    formdata = new FormData();
-    formdata.append("addressLineOne", addressLineOne);
-    formdata.append("addressLineTwo", addressLineTwo);
-    formdata.append("county", county);
-    formdata.append("postCode", postCode);
-    formdata.append("contactNumber", contactNumber);
-    formdata.append("noOfProducts", noOfProducts);
-    //Calling the AJAX Post function that I have already created
-    ajaxPost("SQL/checkoutSQL.php", formdata, printMessage, target, clearScreen);
+function runAJAX(target, clearScreen, targetAddress, dataToSend) {
+  console.log(dataToSend);
+  //Creates Varaibles.
+  var addressLineOne, addressLineTwo, county, postCode, contatNumber, noOfProducts, formdata;
+  //All the files brought in from the form.
+  targetAddress.style.display ='none';
+  addressLineOne = _("firstLineAddressValue").value;
+  addressLineTwo = _("secondLineAddressValue").value;
+  county = _("countyNumber").value;
+  postCode = _("postCodeValue").value;
+  contactNumber = _("contactNumberValue").value
+  noOfProducts = localStorage.length;
+  //FormData is a safe and easy method of posting data.
+  formdata = new FormData();
+  formdata.append("addressLineOne", addressLineOne);
+  formdata.append("addressLineTwo", addressLineTwo);
+  formdata.append("county", county);
+  formdata.append("postCode", postCode);
+  formdata.append("contactNumber", contactNumber);
+  formdata.append("noOfProducts", noOfProducts);
+  //Calling the AJAX Post function that I have already created
+  ajaxPost("SQL/checkoutSQL.php", formdata, printMessage, target, clearScreen);
 }
-
 //This prints the message saying that the order is being prossed. Ans sets the previous page back to visible.
 function printMessage(JSONobj, target, clearScreen) {
     var checkoutFinished;
