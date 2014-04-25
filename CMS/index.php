@@ -18,10 +18,10 @@
                     <li>Total stock of all products:
                         <div id="totalStockNew"></div>
                     </li>
-                    <li>Product with the most stock:
+                    <li>Products with the most stock:
                         <div id="maxStockNew"></div>
                     </li>
-                    <li>Product with the least stock:
+                    <li>Products with the least stock:
                         <div id="minStockNew"></div>
                     </li>
                 </ul>

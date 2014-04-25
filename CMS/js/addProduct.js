@@ -25,6 +25,7 @@ function uploadedProduct() {
 
 //Formatting the way that I want my data to be presnted.
 function jsonThis(jsonObj, target) {
+	console.log(jsonObj);
   var json_output, output, productAddedSuccessfully;
     json_output = JSON.parse(jsonObj);
     target.innerHTML = "";
@@ -55,38 +56,48 @@ function vanishText() {
 }
 //Validates the Form that allows the user to enter a product to the database.
 validateForm = function () {
-  var errors, a, b, c, d, e;
+  var errors, a, b, c, d, e, errorName, errorQuantity, errorDescription, errorCategory;
     //Sets errors to 0
     errors = 0;
     //Checks the name value of the form is entered.
     a = document.forms["myForm"]["name"].value;
     if (a == null || a == "") {
-        _('errorname').innerHTML = "Please enter a name";
+        errorName = _('errorname');
+        errorName.style.color ='red';
+        errorName.innerHTML = "Please enter a name";
         errors = errors + 1;
     }
     //Checks the quantity value is entered.
     b = document.forms["myForm"]["quantity"].value;
     if (b == null || b == "") {
-        _('errorquantity').innerHTML = "Please enter a quantity";
+        errorQuantity = _('errorquantity');
+        errorQuantity.style.color = 'red';
+        errorQuantity.innerHTML = "Please enter a quantity";
         errors = errors + 1;
     }
     //Checks the description part is entered.
     c = document.forms["myForm"]["description"].value;
     if (c == null || c == "") {
-        _('errordescription').innerHTML = "Please enter a description";
+        errorDescription = _('errordescription');
+        errorDescription.style.color = 'red';
+        errorDescription.innerHTML = "Please enter a description";
         errors = errors + 1;
     }
     //Checks to see if a category has been entered.
     d = _("categoryDropDown");
     var strUser = d.options[d.selectedIndex].value;
     if (strUser == "selectCategory") {
-        _('errorcategory').innerHTML = "Please enter a category";
+        errorCategory = _('errorcategory');
+        errorCategory.style.color = 'red';
+        errorCategory.innerHTML = "Please enter a category";
         errors = errors + 1;
     }
     //Checks to see if the price has been entered.
     e = document.forms["myForm"]["price"].value;
     if (e == null || e == "") {
-        _('errorprice').innerHTML = "Please enter a price";
+        errorPrice = _('errorprice');
+        errorPrice.style.color = 'red';
+        errorPrice.innerHTML = "Please enter a price";
         errors = errors + 1;
     }
     //If there are any errors are found it returns false but if not it proccedds.
