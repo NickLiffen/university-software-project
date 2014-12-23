@@ -7,4 +7,6 @@ This is my Second Year Web Scripting Unit. Creating a CMS that allows compaines 
 
 This is not fully functional. Needs Improvements.
 
+Overall Mark: 82%
+
 Copyright Nicholas Liffen
