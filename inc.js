@@ -5,6 +5,10 @@ so I have decided to created one file that includes all the useful functions */
 function _(el) {
     return document.getElementById(el);
 }
+
+function _pat(}{
+    return "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";
+}
 //Returns a Class Name
 function _c(el) {
     return document.getElementsByClassName(el);
